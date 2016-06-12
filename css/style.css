@@ -5,8 +5,8 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 body{
-	margin-left:60px;
-	margin-right:60px;
+	margin-left:40px;
+	margin-right:40px;
 	font-family: 'Roboto-Regular';
 	background: #fff;
 }
@@ -180,11 +180,11 @@ ul.dropdown-menu li {
 }
 /*--//drop-down--*/
 .header-text {
-    width: 13%;
+    width: 20%;
     margin-left:5em;
 }
 .header-text p {
-    font-size: 0.8em;
+    font-size: 1em;
     line-height: 1.6em;
     color: #999;
 }
@@ -382,7 +382,7 @@ h3.title span {
 }
 .pince h5 {
     font-size: 2em;
-    color: #F00;
+    color: #000;
 	transition:.5s all;
 	-webkit-transition:.5s all;
 	-moz-transition:.5s all;
@@ -393,7 +393,7 @@ h3.title span {
 	margin:0;
 }
 .pince:hover .pince-left {
-    background-color: #F00;
+    background-color: #001;
 }
 .pince:hover h5{
 	transform: rotatey(360deg);
@@ -542,8 +542,8 @@ a.diamond:hover p.servc-text{
 /*--//services--*/
 /*--footer--*/
 .footer {
-    background: url(../images/banner2.jpg)no-repeat 0px 0px;
-    background-size: cover;
+    
+   
     padding: 7em 0;
 }
 .footer h3.title {
@@ -2713,4 +2713,30 @@ h3.title1 {
 /*--//responsive-design---*/
 .menu a{
 	color:#fff;
+}
+#myNavbar ul li{
+	border-left:1px solid #fff;
+}
+/* From my Blog Website*/
+.post{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.comments{
+display:block;
+float:left;
+line-height:17px;
+padding:5px 0 0 18px;
+}
+.comments a{
+color:#F07402;
+text-decoration:underline
+}
+.comments a:visited{text-decoration:underline}
+.comments a:hover{text-decoration:none}
+.comments span{
+font-size:14px;
+color:#6E6E6E;
+padding:0 7px;
+line-height:17px;
 }
