@@ -19,8 +19,9 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="form_component.html">Welcome Note</a></li>                          
-                          <li><a class="" href="form_validation.html">Manage Gallary</a></li>
+                          <li><a class="" href="#">Welcome Note</a></li>                          
+                          <li><a class="" href="#">Manage Gallary</a></li>
+						  <li><a class="" href="#">About Section</a></li>
                       </ul>
                   </li>       
                   <li class="sub-menu">
@@ -30,7 +31,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="general.html">Add Post</a></li>
+                          <li><a class="" href="add_post.php">Add Post</a></li>
                           <li><a class="" href="buttons.html">View Post</a></li>
                           <li><a class="" href="grids.html">Manage Category</a></li>
 						  <li><a class="" href="grids.html">Manage Tags</a></li>

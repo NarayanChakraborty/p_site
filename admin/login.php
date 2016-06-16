@@ -1,5 +1,56 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+﻿
+<?php 
+include('../config.php');
+if(isset($_POST['login']))
+{
+    try{
+
+	   $num=0;
+	   $password=$_POST['password'];
+	   $password=md5($password);
+	  
+	  $statement=$db->prepare("select * from tbl_login where username=? and password=?");
+	  $statement->execute(array($_POST['name'],$password));
+	  $num=$statement->rowCount();
+
+	  if($num>0)
+	  {
+	     session_start();
+		 
+		 $_SESSION['name']="snchousebd";
+		 header('location: index.php');
+	  }
+	  else
+	  {
+	   throw new Exception('<div class="error">Invalid Username and/or password</div>');
+	   }
+	}
+	catch(Exception $e)
+	{
+	$error_msg=$e->getMessage();
+	}
+}
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+
 <head>
 
     <!-- Bootstrap CSS -->    
@@ -10,16 +61,7 @@
     <!-- font icon -->
     <link href="css/elegant-icons-style.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />    
-    <!-- full calendar css-->
-    <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-	<link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
-    <!-- easy pie chart-->
-    <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-    <!-- owl carousel -->
-    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
-	<link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
-    <!-- Custom styles -->
-	<link rel="stylesheet" href="css/fullcalendar.css">
+
 	<link href="css/widgets.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
@@ -27,6 +69,7 @@
 	<link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
 
 </head>
+
 
 <body>
     <div class="container">
@@ -36,6 +79,20 @@
                 <h2> Binary Admin : Login</h2>
                
                 <h5>( Login yourself to get access )</h5>
+				
+																		<?php
+								if(isset($error_msg))
+								{
+									?>
+								      <div style="width:400px;text-align:center;margin:0 auto;" class="alert alert-block alert-danger fade in" >
+                          <button  data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove">x</i>
+                          </button>
+                          <strong>Opps!&nbsp; </strong><?php echo $error_msg?>
+                       </div>
+					   <?php
+								}
+								?>
                  <br />
             </div>
         </div>
@@ -47,15 +104,15 @@
                         <strong>   Enter Details To Login </strong>  
                             </div>
                             <div class="panel-body">
-                                <form role="form">
+                                <form role="form" method="post" data-toggle="validator">
                                        <br />
                                      <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
-                                            <input type="text" class="form-control" placeholder="Your Username " />
+                                            <input type="text" class="form-control" name="name" placeholder="Your Username " required />
                                         </div>
-                                                                              <div class="form-group input-group">
+                                            <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
-                                            <input type="password" class="form-control"  placeholder="Your Password" />
+                                            <input type="password" class="form-control" data-toggle="validator" name="password" placeholder="Your Password" required/>
                                         </div>
                                     <div class="form-group">
                                         
@@ -64,7 +121,9 @@
                                             </span>
                                         </div>
                                      
-                                     <a href="index.html" class="btn btn-primary ">Login Now</a>
+                                     <div class="form-group">
+										<a href="index.php?>"><button type="submit" name="login" class="btn btn-primary" >Log In</button></a>
+									</div>
                                   
                                     </form>
                             </div>
@@ -86,6 +145,7 @@
     <script src="assets/js/jquery.metisMenu.js"></script>
       <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
+	
    
 </body>
 </html>
