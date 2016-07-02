@@ -5,8 +5,8 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 body{
-	margin-left:40px;
-	margin-right:40px;
+	margin-left:10px;
+	margin-right:10px;
 	font-family: 'Roboto-Regular';
 	background: #fff;
 }
@@ -42,7 +42,7 @@ body a:hover{
 /*----*/
 /*--top-nav--*/
 .header {
-    margin: 2em 2em 0;
+    margin: 1em 1em 0;
     border-bottom: 5px solid #C7C2C2;
     box-shadow: 1px 3px 1px #D0CFCF;
 }

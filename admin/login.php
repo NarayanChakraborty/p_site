@@ -76,9 +76,9 @@ if(isset($_POST['login']))
         <div class="row text-center ">
             <div class="col-md-12">
                 <br /><br />
-                <h2> Binary Admin : Login</h2>
+                <h2> Hello!!! Sir</h2>
                
-                <h5>( Login yourself to get access )</h5>
+                <h5>( Please Login yourself to get access )</h5>
 				
 																		<?php
 								if(isset($error_msg))

@@ -4,7 +4,9 @@
 		<div class="container">
 
 			<div class="clearfix"> </div>
-			<p>© 2016 Personal Website . All rights reserved | Design by <a href="http://w3layouts.com">SN Chakraborty</a></p>	
+			<p>© 2016 Personal Website . All rights reserved | Design by <a href="http://w3layouts.com">SN Chakraborty</a><br>
+			Mail : <a class="email-link" href="mailto:narayanchakraborty1993@gmail.com">narayanchakraborty1993@gmail.com</a>
+			</p>	
 		</div>
 	</div>
 	<!--//copy-right-->
@@ -28,6 +30,7 @@
 	<!--//smooth-scrolling-of-move-up-->
 	<!-- Bootstrap core JavaScript
     ================================================== -->
-
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/bootstrap.js"></script>
 </body>
 </html>

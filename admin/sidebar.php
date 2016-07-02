@@ -19,7 +19,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="#">Welcome Note</a></li>                          
+                          <li><a class="" href="welcome_note.php">Welcome Note</a></li>                          
                           <li><a class="" href="#">Manage Gallary</a></li>
 						  <li><a class="" href="#">About Section</a></li>
                       </ul>
@@ -33,7 +33,7 @@
                       <ul class="sub">
                           <li><a class="" href="add_post.php">Add Post</a></li>
                           <li><a class="" href="buttons.html">View Post</a></li>
-                          <li><a class="" href="grids.html">Manage Category</a></li>
+                          <li><a class="" href="managecategory.php">Manage Category</a></li>
 						  <li><a class="" href="grids.html">Manage Tags</a></li>
                       </ul>
                   </li>

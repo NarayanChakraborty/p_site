@@ -1,24 +1,29 @@
 <?php 
 include_once('header.php');
 ?>
-
+<?php include_once('config.php'); ?>
 	<!--features-->
 	<div class="features">
 		<div class="container">
 			<div class="col-md-4 feature-grids">
 				<h3 class="title">WELCOME</span></h3>
-				<p>popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. 
-				 It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-				<p>popularised in the 1960s with the release of Letraset sheets.  Loremipsum passages, and more recently with desktop publishing software like Aldus PageMaker include</p>
-				<div class="more">
-					<a href="#" style="background-color:#000">Read More</a>
-				</div>
+				<p>
+				<?php 
+					$statement=$db->prepare("select description from tbl_welcome where id=1") ;
+			$statement->execute();
+            $result=$statement->fetch();
+					echo $result['description'];	
+				?>
+				
+				</p>
+				
+
 			</div>
 			<div class="col-md-4 feature-grids">
 				<img src="images/2.png" alt=""/>
 			</div>
 			<div class="col-md-4 feature-grids">
-				<h3 class="title">OUR SPECIFICATIONS</h3>
+				<h3 class="title">Recent Topics</h3>
 				<div class="pince">
 					<div class="pince-left">
 						<h5>01</h5>
@@ -58,7 +63,7 @@ include_once('header.php');
 	<div class="projects">
 		<div class="container">
 			<div class="col-md-3 project-right ">
-				<h3 class="title">OUR <span> PROJECTS</span></h3>
+				<h3 class="title">My <span> Gallary</span></h3>
 				<p>Vero vulputate enim non justo posuere placerat Phasellus mauris vulputate enim non justo posuere placerat egetposuere enim .</p>
 			</div>
 			<div class="col-md-9 project-left">

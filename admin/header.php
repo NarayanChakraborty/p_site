@@ -28,8 +28,11 @@
 	<link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
     <!-- Custom styles -->
 	<link rel="stylesheet" href="css/fullcalendar.css">
-	<link href="css/widgets.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+
+
+		<link href="css/widgets.css" rel="stylesheet">
+
+	    <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
 	<link href="css/xcharts.min.css" rel=" stylesheet">	
 	<link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
@@ -38,7 +41,13 @@
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
       <script src="js/lte-ie7.js"></script>
+	  
     <![endif]-->
+		<link href="css/styleadmin.css" rel="stylesheet">
+	<!----CKEditor Start---->
+<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+<!---//CKEditor End----->
+
   </head>
 
   <body>
@@ -52,19 +61,11 @@
             </div>
 
             <!--logo start-->
-            <a href="index.php" class="logo">Nice <span class="lite">Admin</span></a>
+            <a href="index.php" class="logo">Masud <span class="lite">Kaium</span></a>
             <!--logo end-->
 
-            <div class="nav search-row" id="top_menu">
-                <!--  search form start -->
-                <ul class="nav top-menu">                    
-                    <li>
-                        <form class="navbar-form">
-                            <input class="form-control" placeholder="Search" type="text">
-                        </form>
-                    </li>                    
-                </ul>
-                <!--  search form end -->                
+            <div  id="top_menu">
+                          
             </div>
 
             <div class="top-nav notification-row">                
@@ -77,7 +78,7 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                
-                            <span class="username">Masud Kaium</span>
+                            <span class="username" style="font-size:17px;">My Account</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">

@@ -1,6 +1,5 @@
 
 <?php
-/*
 ob_start();
 session_start();
 if($_SESSION['name']!='snchousebd')
@@ -8,9 +7,7 @@ if($_SESSION['name']!='snchousebd')
 header('location: login.php');
 }
 include('../config.php');
-*/
 ?>
-
 
 
 <?php
@@ -128,10 +125,29 @@ if(isset($_POST['form1']))
 }
 ?>
 
-<?php include("header.php"); ?>
-<!---Add New Post---->
+<?php include_once('header.php'); ?>
+
 <?php include_once('sidebar.php'); ?>
 
+
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+		  <div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header"><i class="fa fa fa-bars"></i> Pages</h3>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+						<li><i class="fa fa-bars"></i>Pages</li>
+						<li><i class="fa fa-square-o"></i>Pages</li>
+					</ol>
+				</div>
+			</div>
+              <!-- page start-->
+
+
+
+<div style="margin-left:30px;">
 <h2>Add new Post</h2>
 <?php
 if(isset($error_message))
@@ -150,7 +166,7 @@ if(isset($error_message))
 	<tr><td><b>Description</b></td></tr>
 	<tr>
 		<td>
-			<textarea name="post_description" cols="30" rows="5"></textarea>
+			<textarea name="post_description" cols="100" rows="10"></textarea>
 				<script type="text/javascript">
 				if ( typeof CKEDITOR == 'undefined' )
 				{
@@ -170,7 +186,7 @@ if(isset($error_message))
 			</script>
 		</td>
 	</tr>
-	<tr><td><b>FeaturedImage</b></td></tr>
+	<tr><td><b>Featured Image</b></td></tr>
 	<tr><td><input type="file" name="post_image"></td></tr>
 	<tr><td><b>Select a Category</b></td></tr>
 	<tr>
@@ -210,6 +226,13 @@ if(isset($error_message))
 			?>	
          </td>
 	</tr>
-	<tr><td><input type="submit" value="Save" name="form1"></td></tr>
+	<tr><td><input   style="align:right; width:100px" type="submit" value="post" name="form1"></td></tr>
 </table>
-</form>		
+</form>	</div>
+
+              <!-- page end-->
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+  <?php include_once('footer.php'); ?>

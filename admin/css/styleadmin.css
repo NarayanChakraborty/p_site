@@ -1,0 +1,75 @@
+*{
+   padding:0;
+   margin:0;
+   }
+.clear{
+ clear:both;
+} 
+body,input,textarea,select{
+font-family:"Times New Roman",arial;
+font-size:16px;
+}
+input[type="submit"]{
+cursor:pointer;
+  background-color:#3d9ccd;
+  color:#fff;
+}
+input.short[type="text"],
+input.short[type="password"]{
+width:200px;
+}
+input.medium[type="text"],
+input.medium[type="password"]{
+width:400px;
+}
+input.long[type="text"],
+input.long[type="password"]{
+width:900px;
+}
+
+table.tabl{
+margin:5px;
+}
+table.tabl tr td input[type="text"]{
+height:23px;
+line-height:30px;
+}
+table.tabl2{
+margin-top:10px;
+margin-bottom:10px;
+}
+table.tabl2 tr td,th {
+text-align:center;
+padding:2px;
+}
+table.tabl2 tr td a{
+text-decoration:none;
+color:#15638A;
+}
+table.tabl2 tr:nth-child(2n) td{
+background-color:#9EB0AD;
+}
+table.tabl2 tr:nth-child(2n+1) td{
+background-color:#C7D9D6;
+}
+table.tabl2 tr th{
+background-color:#3d9ccd;
+color:#fff;
+}
+.error{
+	padding:10px;
+	font-weight:bold;
+	color:#f74937;
+}
+.success{
+	color:#3684d4;
+	font-weight:bold;
+	padding:10px;
+}
+.tabl{
+	color:#000;
+}
+.tabl td {
+	margin-top:5px;
+	padding:2px;
+}

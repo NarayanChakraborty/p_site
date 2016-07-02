@@ -1,6 +1,7 @@
 
                   <div class="widget-foot">
-                    <!-- Footer goes here -->
+
+  
                   </div>
                 </div>
               </div>
@@ -13,8 +14,19 @@
           </section>
       </section>
       <!--main content end-->
+
   </section>
   <!-- container section start -->
+                    
+	  					      	<!--copy-right-->
+	<div class="copy-right">
+		<div class="container" style="text-align:center;">
+
+			<div class="clearfix"> </div>
+			<p>© 2016 Personal Website . All rights reserved | Design by <a href="http://w3layouts.com">SN Chakraborty</a></p>	
+		</div>
+	</div>
+	<!--//copy-right-->
 
     <!-- javascripts -->
     <script src="js/jquery.js"></script>
@@ -60,6 +72,9 @@
 	
   <script>
 
+
+  
+  
       //knob
       $(function() {
         $(".knob").knob({
