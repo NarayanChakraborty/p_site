@@ -34,6 +34,10 @@ table.tabl tr td input[type="text"]{
 height:23px;
 line-height:30px;
 }
+table.tabl tr td input[type="submit"]{
+height:25px;
+min-width:50px;
+}
 table.tabl2{
 margin-top:10px;
 margin-bottom:10px;
