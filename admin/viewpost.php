@@ -55,81 +55,67 @@ foreach($result as $row)
 		<tr>
 			<td><?php echo $i;?></td>
 			<td><?php echo $row['post_title'];?></td>
-			<td><a id="inline" class="fancybox" href="#inline<?php echo $i;?>">View</a>
-			<div id="inline<?php echo $i;?>" style="width:550px; display:none;overflow:auto;">
-				<h3 style="background-color:#3d9ccd;color:#fff;">View Data</h3>
-				<p>
-				 <form action=""method="POST">
-				 <table style="border:1px solid #3d9ccd;">
-				    <tr><td><b>Post Title</b></td></tr>
-					<tr>
-						<td><?php echo $row['post_title'];?></td>
-					</tr>
-					<tr>
-						<td><b>Description</b></td>
-					</tr>
-					<tr>
-						<td>
-						<?php echo $row['post_description'];?>
-							<br>
-						</td>
-					</tr>
-					<tr>
-						<td><b>Featured Image</b></td>
-					</tr>
-					<tr>
-							<td><img src="../uploads/<?php echo $row['post_image'];?>" alt="" width="200px" height="180px"></td>
-					</tr>
-					<tr>
-						<td><b>Category</b></td>
-					</tr>
-					<tr>
-						<td>
-						<?php
-						$statement1=$db->prepare("select * from tbl_category where cat_id=?");
-						$statement1->execute(array($row['cat_id']));
-						$result1=$statement1->fetchAll(PDO::FETCH_ASSOC);
-						foreach($result1 as $row1)
-						{
-							echo $row1['cat_name'];
-						}
-						
-						?>
-						</td>
-					</tr>
-					<tr>
-						<td><b>Tag</b></td>
-					</tr>
-					<tr>
-						<td>
-                             <?php
-								//when retrive data (using explode)
-								$arr=explode(',',$row['tag_id']);
-								$arr_count=count(explode(',',$row['tag_id']));
-								$k=0;
-								for($j=0;$j<$arr_count;$j++)
-								{
-									 $statement1=$db->prepare("select * from tbl_tag where tag_id=?");
-									 $statement1->execute(array($arr[$j]));
-									 $result1=$statement1->fetchAll(PDO::FETCH_ASSOC);
-									 foreach($result1 as $row1)
-									 {
-										$arr1[$k]=$row1['tag_name'];  
-									 }
-								   $k++;
-                                }
-								$tag_names=implode(",",$arr1);
-								echo $tag_names;
-                              ?>							 
-						</td>
-					</tr>
-				 </table>
-				 </form>
-				 </p>
-			</div>
-			&nbsp;|&nbsp;
-			<a href="postedit.php?id=<?php echo $row['post_id'];?>">Edit</a>&nbsp;|
-			&nbsp;<a onclick='return confirmDelete();' href="postdelete.php?id=<?php echo $row['post_id'];?>">Delete</a></td>
+			<td><div class="btn-group">
+													  <a class="btn btn-primary fancybox" href="#inline<?php echo $row['post_id'];?>"title="View image"><i class="icon_plus_alt2"></i></a>
+													  <!--Fancy Box-->
+													  
+													  <div id="inline<?php echo $row['post_id'];?>"style="display:none;width:700px;margin:10px 30px">
+														<h3 style= "border-bottom: 2px solid #295498; color:#0C86AC;margin-bottom:10px;" >Product Details</h3>
+														<div class="shopper-info">
+														
+														  <h4><?php echo $row['p_name']; ?></h4>
+														  <img src="img/products/<?php echo $row['p_img'];?>" width="450" height="400">
+														  <h4>Product Details</h4>
+														  <p>
+														  <?php echo $row['p_details']; ?>
+														  </p>
+														  <h4>Product Stock</h4>
+														  <p>
+															<i class=" fa fa-arrow-right"> Small : <strong style="color: #FE980F"><?php echo $row['p_small'] ; ?></strong></i>
+														  </p>
+														  <p>
+															<i class=" fa fa-arrow-right"> Medium : <strong style="color: #FE980F"><?php echo $row['p_medium']; ?></strong></i>
+														  </p>
+														  <p>
+															<i class=" fa fa-arrow-right"> Large : <strong style="color: #FE980F"><?php echo $row['p_large']; ?></strong></i>
+														  </p>
+														</div>
+													  </div>
+													  <!--Fancy box End-->
+													  <a class="btn btn-success" title="Edit this Product" href="edit_product.php?id=<?php echo $row['p_id']; ?>"><i class="icon_check_alt2"></i>
+													  
+													  </a>
+													  <a class="btn btn-danger"  title="Delete This product" data-toggle="modal" data-target="#productModal<?php echo $row['p_id'];?>"><i class="icon_close_alt2"></i>
+													   </a>
+													  
+																		  
+											<!-- Modal -->
+													<div id="productModal<?php echo $row['p_id'];?>" class="modal fade " role="dialog">
+													  <div class="modal-dialog">
+
+														<!-- Modal content-->
+														<div class="modal-content">
+														  <div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+															<h4 class="modal-title">DELETE Confirmation</h4>
+														  </div>
+														  <div class="modal-body">
+															<h4>Are You Confirm To Delete This Element?</h4>
+														  </div>
+														  <div class="modal-footer">
+															<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+															<a class="btn btn-danger btn-ok" href="product_delete.php?id=<?php echo $row['p_id']; ?>" >Confirm</a>
+														  </div>
+														</div>
+
+													  </div>
+													</div>
+												
+													  
+													  
+												  </div>
+												  
+												  </td>
 		</tr>
 			
 	

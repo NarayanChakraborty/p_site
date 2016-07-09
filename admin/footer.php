@@ -122,6 +122,18 @@
 
 
   </script>
+  	 <!--For Fancyapp-->
+  <!--<script type="text/javascript" src="fancyapp/lib/jquery-1.10.1.min.js"></script> -->
+    <script type="text/javascript" src="../fancyapp/source/jquery.fancybox.js?v=2.1.5"></script>
+    <link rel="stylesheet" type="text/css" href="../fancyapp/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+  
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $('.fancybox').fancybox();
+          });
+      </script>
+  
+  
 	<!--validator js-->
 	<script src="js/validator.min.js"></script>
 	<!--//validator js-->
