@@ -50,12 +50,14 @@ table.tabl2 tr td a{
 text-decoration:none;
 color:#15638A;
 }
-table.tabl2 tr:nth-child(2n) td{
-background-color:#9EB0AD;
+table.tabl2 tr{
+	margin-bottom:1px;
 }
-table.tabl2 tr:nth-child(2n+1) td{
-background-color:#C7D9D6;
+table.tabl2 tr td{
+background-color:#fff;
+ border-bottom: 1px solid #3d9ccd;
 }
+
 table.tabl2 tr th{
 background-color:#3d9ccd;
 color:#fff;

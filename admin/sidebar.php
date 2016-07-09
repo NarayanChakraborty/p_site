@@ -32,7 +32,7 @@
                       </a>
                       <ul class="sub">
                           <li><a class="" href="add_post.php">Add Post</a></li>
-                          <li><a class="" href="buttons.html">View Post</a></li>
+                          <li><a class="" href="viewpost.php">View Post</a></li>
                           <li><a class="" href="managecategory.php">Manage Category</a></li>
 						  <li><a class="" href="managetag.php">Manage Tags</a></li>
                       </ul>
