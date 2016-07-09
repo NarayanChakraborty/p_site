@@ -56,29 +56,82 @@ foreach($result as $row)
 			<td><?php echo $i;?></td>
 			<td><?php echo $row['post_title'];?></td>
 			<td><div class="btn-group">
-													  <a class="btn btn-primary fancybox" href="#inline<?php echo $row['post_id'];?>"title="View image"><i class="icon_plus_alt2"></i></a>
+													  <a class="btn btn-primary fancybox" href="#inline<?php echo $row['post_id'];?>"title="View Post"><i class="icon_plus_alt2"></i></a>
 													  <!--Fancy Box-->
 													  
 													  <div id="inline<?php echo $row['post_id'];?>"style="display:none;width:700px;margin:10px 30px">
-														<h3 style= "border-bottom: 2px solid #295498; color:#0C86AC;margin-bottom:10px;" >Product Details</h3>
+														<h3 style= "border-bottom: 2px solid #295498; color:#0C86AC;margin-bottom:10px;" >Post Details</h3>
 														<div class="shopper-info">
-														
-														  <h4><?php echo $row['p_name']; ?></h4>
-														  <img src="img/products/<?php echo $row['p_img'];?>" width="450" height="400">
-														  <h4>Product Details</h4>
-														  <p>
-														  <?php echo $row['p_details']; ?>
-														  </p>
-														  <h4>Product Stock</h4>
-														  <p>
-															<i class=" fa fa-arrow-right"> Small : <strong style="color: #FE980F"><?php echo $row['p_small'] ; ?></strong></i>
-														  </p>
-														  <p>
-															<i class=" fa fa-arrow-right"> Medium : <strong style="color: #FE980F"><?php echo $row['p_medium']; ?></strong></i>
-														  </p>
-														  <p>
-															<i class=" fa fa-arrow-right"> Large : <strong style="color: #FE980F"><?php echo $row['p_large']; ?></strong></i>
-														  </p>
+				<p>
+				 
+				 <table style="border:2px solid #3d9ccd" class="tabl3" >
+				    <tr><td><b>Post Title</b></td></tr>
+					<tr>
+						<td><?php echo $row['post_title'];?></td>
+					</tr>
+					<tr>
+						<td><b>Featured Image</b></td>
+					</tr>
+					<tr>
+							<td><img src="uploads/<?php echo $row['post_image'];?>" alt="" width="320px" height="250px"></td>
+					</tr>
+					<tr>
+						<td><b>Description</b></td>
+					</tr>
+					<tr>
+						<td>
+						<?php echo $row['post_description'];?>
+							<br>
+						</td>
+					</tr>
+					
+					<tr>
+						<td><b>Category</b></td>
+					</tr>
+					<tr>
+						<td>
+						<?php
+						$statement1=$db->prepare("select * from tbl_category where cat_id=?");
+						$statement1->execute(array($row['cat_id']));
+						$result1=$statement1->fetchAll(PDO::FETCH_ASSOC);
+						foreach($result1 as $row1)
+						{
+							echo $row1['cat_name'];
+						}
+						
+						?>
+						</td>
+					</tr>
+					<tr>
+						<td><b>Tag</b></td>
+					</tr>
+					<tr>
+						<td>
+                             <?php
+								//when retrive data (using explode)
+								$arr=explode(',',$row['tag_id']);
+								$arr_count=count(explode(',',$row['tag_id']));
+								$k=0;
+								for($j=0;$j<$arr_count;$j++)
+								{
+									 $statement1=$db->prepare("select * from tbl_tag where tag_id=?");
+									 $statement1->execute(array($arr[$j]));
+									 $result1=$statement1->fetchAll(PDO::FETCH_ASSOC);
+									 foreach($result1 as $row1)
+									 {
+										$arr1[$k]=$row1['tag_name'];  
+									 }
+								   $k++;
+                                }
+								$tag_names=implode(",",$arr1);
+								echo $tag_names;
+                              ?>							 
+						</td>
+					</tr>
+				 </table>
+			
+				 </p>
+														  
 														</div>
 													  </div>
 													  <!--Fancy box End-->

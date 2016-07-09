@@ -58,13 +58,14 @@ if(isset($_POST['form1']))
 
 	    
 		//only allow png ,jpg,jpeg,gif
-		if(($file_ext!='.png')&&($file_ext!='.jpg')&&($file_ext!='.jpeg')&&($file_ext!=['.gif']))
+		if(($file_ext!='.png')&&($file_ext!='.jpg')&&($file_ext!='.jpeg')&&($file_ext!='.gif'))
 		{
 			throw new Exception("only jpg,jpeg,png and gif format are allowed");
 		}
 	     
+	     
         //upload image to a folder
-        move_uploaded_file($_FILES['post_image']['tmp_name'],"../uploads/".$f1);		
+        move_uploaded_file($_FILES['post_image']['tmp_name'],"uploads/".$f1);		
 		
 		
 		/*UPLOAD IMAGE DIRECTLY TO A DATABASE
