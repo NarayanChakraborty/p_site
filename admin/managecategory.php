@@ -58,11 +58,11 @@ require_once('../config.php');
 			$statement1->execute(array($cat_name,$_POST['hidden_id_for_edit_cat']));
 						
 			
-			$success_message1='Category Name Successfully Updated';
+			$success_message2='Category Name Successfully Updated';
 		}
 		catch(Exception $e)
 		{
-		    $error_message1=$e->getMessage();	
+		    $error_message2=$e->getMessage();	
 		}
 	}
 

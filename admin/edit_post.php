@@ -112,7 +112,7 @@ if(isset($_POST['form1']))
 		 }			 
 
 
-		   $success_message="Post is inserted succesfully";
+		   $success_message="Post is updated succesfully";
 	
 	
 	
