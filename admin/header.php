@@ -86,12 +86,12 @@
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
                             <li class="eborder-top">
-                                <a href="#"><i class="icon_profile"></i> My Profile</a>
+                                <a href="change_password.php"><i class="icon_profile"></i>Change Password</a>
                             </li>
                             <li>
                                 <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
                             </li>
-                      
+                             
                             <li>
                                 <a href="login.php"><i class="icon_key_alt"></i> Log Out</a>
                             </li>

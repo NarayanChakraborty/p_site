@@ -27,7 +27,7 @@ if(isset($_POST['login']))
 	}
 	catch(Exception $e)
 	{
-	$error_msg=$e->getMessage();
+	$error_message=$e->getMessage();
 	}
 }
 ?>
@@ -80,19 +80,19 @@ if(isset($_POST['login']))
                
                 <h5>( Please Login yourself to get access )</h5>
 				
-																		<?php
-								if(isset($error_msg))
-								{
-									?>
-								      <div style="width:400px;text-align:center;margin:0 auto;" class="alert alert-block alert-danger fade in" >
-                          <button  data-dismiss="alert" class="close close-sm" type="button">
-                          <i class="icon-remove">x</i>
+								
+		<?php	
+					 if(isset($error_message)){
+                        ?>
+                        <div class="alert alert-block alert-danger fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove">X</i>
                           </button>
-                          <strong>Opps!&nbsp; </strong><?php echo $error_msg?>
+                          <strong>Opps!&nbsp; </strong><?php echo $error_message;?>
                        </div>
-					   <?php
-								}
-								?>
+                        <?php
+                      }
+					  ?>
                  <br />
             </div>
         </div>

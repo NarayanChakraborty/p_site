@@ -31,49 +31,41 @@ require_once('../config.php');
 		}
 		$statement=$db->prepare("insert into tbl_tag(tag_name) values(?)");
 		$statement->execute(array($_POST['tag_name']));
-		$success_msg="Tag Name has been successfully inserted";
+		$success_message1="Tag Name has been successfully inserted";
 
 	 }
      catch(Exception $e)
 	 {
-		$error_message=$e->getMessage();
+		$error_message1=$e->getMessage();
 	 }
 	 
  }
  
  
- //Form2 to update data
+  //Form2 to update data
  
- if(isset($_POST['form2']))
- {
-	 try{
-		 if(empty($_POST['tag_name']))
-		 {
-			 throw new Exception("Tag Name can not be empty");
-		 }
-		 
-		 //update query
-		 
-		 $statement=$db->prepare("update tbl_tag set tag_name=? where tag_id=?");
-		 $statement->execute(array($_POST['tag_name'],$_POST['hdn']));
-		 
-		 $success_msg1="Tag Name has been successfully updated";
-	 }
-	 catch(Exception $e)
-	 {
-		 $error_message1=$e->getMessage();
-	 }
- }
 
- //Delete operation
- if(isset($_REQUEST['id']))
- {
-	 $id=$_REQUEST['id'];
-	 $statement=$db->prepare("delete from tbl_tag where tag_id=?");
-	 $statement->execute(array($id));
-	 $success_msg2="Tag Name has been successfully Deleted";
- }
  
+ 	if(isset($_POST['form_edit_tag']))
+	{
+		try{
+			if(empty($_POST['edit_tag_name']))
+			{
+				throw new Exception('Tag Name Can not be Empty');
+			}
+			
+			$cat_name=mysql_real_escape_string($_POST['edit_tag_name']);
+			$statement1=$db->prepare('update tbl_tag set tag_name=? where tag_id=?');
+			$statement1->execute(array($cat_name,$_POST['hidden_id_for_edit_tag']));
+						
+			
+			$success_message2='Tag Name Successfully Updated';
+		}
+		catch(Exception $e)
+		{
+		    $error_message2=$e->getMessage();	
+		}
+	}
 ?>
 
 <?php include_once('header.php'); ?>
@@ -132,20 +124,56 @@ require_once('../config.php');
 </tr>
 
 <!-------SQL with PDO to fetch all category----->
-		  <?php
-		if(isset($error_message1))
-		{
-		  echo "<div class='error'>".$error_message1."</div>";
-		}
-		if(isset($success_msg1))
-		{
-			echo "<div class='success'>".$success_msg1."</div>";
-		}
-			if(isset($success_msg2))
-		{
-			echo "<div class='success'>".$success_msg2."</div>";
-		}
-		?>
+		<?php	
+					 if(isset($error_message1)){
+                        ?>
+                        <div class="alert alert-block alert-danger fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Opps!&nbsp; </strong><?php echo $error_message1;?>
+                       </div>
+                        <?php
+                      }
+                      if (isset($success_message1)) {
+                       ?>
+                       <div class="alert alert-success fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Well done!&nbsp; </strong><?php echo $success_message1;?>
+                       </div>
+                       <?php
+                        }
+                      ?>
+					 
+					 <?php
+                      if(isset($error_message2)){
+                        ?>
+                        <div class="alert alert-block alert-danger fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Opps!&nbsp; </strong><?php echo $error_message2;?>
+                       </div>
+                        <?php
+                      }
+                      if (isset($success_message2)) {
+                       ?>
+                       <div class="alert alert-success fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove">X</i>
+                          </button>
+                          <strong>Well done!&nbsp; </strong><?php echo $success_message2;?>
+                       </div>
+                       <?php
+                        }
+                      ?>					 
+						
+		
+		
+		
+		
 <?php
 $i=0;
 $statement=$db->prepare("select * from tbl_tag order by tag_name asc");
@@ -166,26 +194,73 @@ foreach($result as $row)
     <td>
 
 	<?php echo $row['tag_name'];?></td>
-    <td><a id="inline" class="fancybox" href="#inline<?php echo $i; ?>">Edit</a>
-	<div id="inline<?php echo $i; ?>" style="width:400px; display:none;overflow:auto;">
-		<h3>Edit Data</h3>
-		<p>
-		 <form action=""method="POST">
-		 <input type="hidden" name="hdn" value="<?php echo $row['tag_id']; ?>">
-		 <table >
-				<tr>
-					<td>Tag Name</td>
-					<td><input type="text" name="tag_name" value="<?php echo $row['tag_name'];?>"></td>
-				</tr>
-				<tr>
-					<td><input type="submit" name="form2" value="Update"></td>
-				</tr>
-			</table>
-		 </form>
-		 </p>
-	</div>
+    <td><a class="btn btn-info " data-toggle="modal" href="#myModal<?php echo $row['tag_id'];?>">
+                                Edit
+                              </a>
+							 
+								<!---- For Edit------->
+							  
+	                  <!-- Modal -->
+							  <div class="modal fade" id="myModal<?php echo $row['tag_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									  <h4 class="modal-title">Edit This Tag Name</h4>
+									</div>
+									<div class="modal-body">
+									  <h4>Tag Name :</h4>
+									  <form method="post" action="" enctype="multipart/form-data">
+										<input type="text"value="<?php echo $row['tag_name'];?>"class="form-control" name="edit_tag_name"><br>
+										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+										<input type="hidden" name="hidden_id_for_edit_tag" value="<?php echo $row['tag_id'];?>">
+										<input type="submit" value="Update" class="btn btn-success" name="form_edit_tag">
+									  </form>
+									</div>         
+								  </div>
+								</div>
+							  </div>
+							  <!-- modal -->
+							  <!---- For Edit------->
+							  
 	&nbsp;|&nbsp;
-	<a onclick='return confirmDelete();' href="managetag.php?id=<?php echo $row['tag_id']; ?>">Delete</a></td>
+	
+	  <a class="btn btn-danger " data-toggle="modal"
+							  data-target="#MyModal<?php echo $row['tag_id'];?>"  >
+                                  Delete!
+                              </a>
+	</td>
+	
+	
+	 <!-------------FOR Delete-------------->
+							  
+							  <!-- Modal -->
+								<div id="MyModal<?php echo $row['tag_id'];?>" class="modal fade " role="dialog">
+								  <div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+									  <div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">DELETE Confirmation</h4>
+									  </div>
+									  <div class="modal-body">
+										<h4>Are You Confirm To Delete This Element?</h4>
+									  </div>
+									  <div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										<a class="btn btn-danger btn-ok" href="delete_tag.php?ID=<?php echo $row['tag_id'];?>" >Confirm</a>
+									  </div>
+									</div>
+
+								  </div>
+								</div>
+															  
+															  
+							  <!-------------FOR Delete-------------->
+	
+	
+	
 </tr>  
 
 <?php	
