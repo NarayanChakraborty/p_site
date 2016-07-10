@@ -40,6 +40,23 @@ if(isset($_POST['form1']))
 		{
 			throw new Exception("Tag Name can not be empty");
 		}
+		
+		         //Multiple tag... access
+		   $tag_id=$_POST['tag_id'];
+		   $i=0;
+		   
+		    if(is_array($tag_id))
+			{
+			   foreach($tag_id as $key=>$val)
+			   {
+				   $arr[$i]=$val;
+				   $i++;			   
+			   }
+		   }
+		   
+		   //implode
+		   $tag_ids=implode(",",$arr);
+		   
  	    
 	 //IMAGE MANAGE
         //if no new image is selected  
@@ -91,15 +108,36 @@ if(isset($_POST['form1']))
 				 $statement=$db->prepare("update  tbl_post set post_title=?,post_description=?,post_image=?,cat_id=?,tag_id=? where post_id=?");
 		   $statement->execute(array($_POST['post_title'],$_POST['post_description'],$f1,$_POST['cat_id'],$tag_ids,$id));
 				
-					 
+						 
 		 }			 
+
+
+		   $success_message="Post is inserted succesfully";
 	
+	
+	
+	}
 	catch(Exception $e)
 	{
 		$error_message=$e->getMessage();
 	}
 }
 ?>
+
+<?php	
+	$statement=$db->prepare("select * from tbl_post where post_id=?");
+	$statement->execute(array($id));
+	$result=$statement->fetchAll(PDO::FETCH_ASSOC);
+	foreach($result as $row)
+	{
+		$post_title=$row['post_title'];
+		$post_description=$row['post_description'];
+		$post_image=$row['post_image'];
+		$cat_id=$row['cat_id'];
+		$tag_id=$row['tag_id'];
+	}
+?>
+
 
 <?php include_once('header.php'); ?>
 
@@ -125,24 +163,38 @@ if(isset($_POST['form1']))
 
 <div style="margin-left:30px;">
 <h2>Add new Post</h2>
-<?php
-if(isset($error_message))
-		{
-		  echo "<div class='error'>".$error_message."</div>";
-		}
-		if(isset($success_message))
-		{
-			echo "<div class='success'>".$success_message."</div>";
-		}
-?>
+                   <?php
+                      if(isset($error_message)){
+                        ?>
+                        <div class="alert alert-block alert-danger fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove">x</i>
+                          </button>
+                          <strong>Opps!&nbsp; </strong><?php echo $error_message;?>
+                       </div>
+                        <?php
+                      }
+                      if (isset($success_message)) {
+                       ?>
+                        <div class="alert alert-block alert-success fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove">x</i>
+                          </button>
+                          <strong>Well done!&nbsp; </strong><?php echo $success_message;?>
+                       </div>
+                       <?php
+                        }
+                      ?>
 <form action="" method="POST" enctype="multipart/form-data">
 <table class="tabl">
     <tr><td><b>Title<b></td></tr>
-	<tr><td><input class="long" type="text"name="post_title"></td></tr>
+	<tr><td><input class="long" type="text"name="post_title"value="<?php echo $post_title;?>"></td></tr>
 	<tr><td><b>Description</b></td></tr>
 	<tr>
 		<td>
-			<textarea name="post_description" cols="100" rows="10"></textarea>
+			<textarea name="post_description" cols="100" rows="10">
+			<?php echo $post_description; ?>
+			</textarea>
 				<script type="text/javascript">
 				if ( typeof CKEDITOR == 'undefined' )
 				{
@@ -162,44 +214,68 @@ if(isset($error_message))
 			</script>
 		</td>
 	</tr>
-	<tr><td><b>Featured Image</b></td></tr>
+	<tr><td>Previous FeaturedImage Preview</td></tr>
+	<tr><td><img src="uploads/<?php echo $post_image; ?>" alt="" width="300px" height="250px"></td></tr>
+	<tr><td>New FeaturedImage</td></tr>
 	<tr><td><input type="file" name="post_image"></td></tr>
 	<tr><td><b>Select a Category</b></td></tr>
 	<tr>
 		<td>
 			<select name="cat_id">
-			<option value="">Select a category</option>
-			<?php
-			//To fetch all category from tbl_category Table
-			$statement=$db->prepare("select * from tbl_category order by cat_name asc") ;
-			$statement->execute();
-            $result=$statement->fetchAll(PDO::FETCH_ASSOC);
-			foreach($result as $row)
-			{
-				?>
-			   <option value="<?php echo $row['cat_id'];?>"><?php echo $row['cat_name'];?></option>	
-			<?php
-			}
-			 ?>
-			 
+			     <option value="">Select a Category</option>
+               	
+                 <?php
+				 $statement=$db->prepare("select * from tbl_category order by cat_name asc");
+				 $statement->execute();
+				 $result=$statement->fetchAll(PDO::FETCH_ASSOC);
+				 foreach($result as $row)
+				 {
+					 if($row['cat_id']==$cat_id)
+					 {
+						?><option value="<?php echo $row['cat_id'];?>" selected><?php echo $row['cat_name'];?></option><?php	 
+					 }
+					 else
+					 {
+						 ?><option value="<?php echo $row['cat_id'];?>"><?php echo $row['cat_name'];?></option><?php	
+					 }
+				 }
+				 
+				 ?>
+			</select>
 		</td>
 	</tr>	
 	<tr><td><b>Select a Tag</b></td></tr>
 	<tr>
 	     <td>
-			 <?php
-					//To fetch all Tag from tbl_tag Table
-					$statement=$db->prepare("select * from tbl_tag order by tag_name asc") ;
-					$statement->execute();
-					$result=$statement->fetchAll(PDO::FETCH_ASSOC);
-					foreach($result as $row)
-					{
-			        ?>	
-		          <input type="checkbox" name="tag_id[]"value="<?php echo $row['tag_id']; ?>">&nbsp;<?php echo $row['tag_name'];?></input><br/>	
-  				  
-	        	<?php
-					}
-			?>	
+			  
+                <?php
+                $statement=$db->prepare("select * from tbl_tag order by tag_name asc");				
+		        $statement->execute();
+				$result=$statement->fetchAll(PDO::FETCH_ASSOC);
+				foreach($result as $row)
+				{
+				 $j=0;	
+				 $tagarr=explode(",",$tag_id);
+				 $tagcount=count(explode(",",$tag_id));
+				 $ismatch=0;
+				 for(;$j<$tagcount;$j++)
+				 {
+					 if($tagarr[$j]==$row['tag_id'])
+					 {
+						 $ismatch=1;
+						 break;
+					 }
+				 }
+					if($ismatch==1)
+						{
+							?><input type="checkbox" name="tag_id[]" value="<?php echo $row['tag_id'];?>" checked><?php echo $row['tag_name']; ?></input><br/><?php
+						}
+						else
+						{
+						?><input type="checkbox" name="tag_id[]" value="<?php echo $row['tag_id'];?>"><?php echo $row['tag_name']; ?></input><br/><?php
+				        }
+				}
+				?>
          </td>
 	</tr>
 	<tr><td><input   style="align:right; width:100px" type="submit" value="post" name="form1"></td></tr>
