@@ -58,7 +58,7 @@ if(isset($_POST['form1']))
 
 	    
 		//only allow png ,jpg,jpeg,gif
-		if(($file_ext!='.png')&&($file_ext!='.jpg')&&($file_ext!='.jpeg')&&($file_ext!='.gif'))
+		if(($file_ext!='.png')&&($file_ext!='.jpg')&&($file_ext!='.jpeg')&&($file_ext!='.gif')&&($file_ext!='.PNG')&&($file_ext!='.JPG')&&($file_ext!='.JPEG')&&($file_ext!='.GIF'))
 		{
 			throw new Exception("only jpg,jpeg,png and gif format are allowed");
 		}
@@ -150,16 +150,28 @@ if(isset($_POST['form1']))
 
 <div style="margin-left:30px;">
 <h2>Add new Post</h2>
-<?php
-if(isset($error_message))
-		{
-		  echo "<div class='error'>".$error_message."</div>";
-		}
-		if(isset($success_message))
-		{
-			echo "<div class='success'>".$success_message."</div>";
-		}
-?>
+                   <?php
+                      if(isset($error_message)){
+                        ?>
+                        <div class="alert alert-block alert-danger fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove">x</i>
+                          </button>
+                          <strong>Opps!&nbsp; </strong><?php echo $error_message;?>
+                       </div>
+                        <?php
+                      }
+                      if (isset($success_message)) {
+                       ?>
+                        <div class="alert alert-block alert-success fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove">x</i>
+                          </button>
+                          <strong>Well done!&nbsp; </strong><?php echo $success_message;?>
+                       </div>
+                       <?php
+                        }
+                      ?>
 <form action="" method="POST" enctype="multipart/form-data">
 <table class="tabl">
     <tr><td><b>Title<b></td></tr>

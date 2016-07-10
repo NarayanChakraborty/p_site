@@ -135,7 +135,7 @@ foreach($result as $row)
 														</div>
 													  </div>
 													  <!--Fancy box End-->
-													  <a class="btn btn-success" title="Edit this Product" href="edit_product.php?id=<?php echo $row['p_id']; ?>"><i class="icon_check_alt2"></i>
+													  <a class="btn btn-success" title="Edit this Product" href="edit_post.php?id=<?php echo $row['p_id']; ?>"><i class="icon_check_alt2"></i>
 													  
 													  </a>
 													  <a class="btn btn-danger"  title="Delete This product" data-toggle="modal" data-target="#productModal<?php echo $row['p_id'];?>"><i class="icon_close_alt2"></i>
