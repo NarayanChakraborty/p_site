@@ -51,7 +51,7 @@
 					 ?> 
 					
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <ul class="list-unstyled">
                               		    <?php 
 					for($j=0;$j<$final_arr_date_count;$j++)

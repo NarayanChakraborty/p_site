@@ -1,43 +1,83 @@
+
+<?php
+if(!isset($_REQUEST['id']))
+{
+	header('location: blog.php');
+}
+$id=$_REQUEST['id'];
+?>
+
+
 <?php include('header.php'); ?>
 		
  <!-- Page Content -->
     <div class="container" style="margin-top:10px;">
 
         <div class="row">
+		 <?php
+        			 include('config.php');
+					 $statement=$db->prepare("select * from tbl_post where post_id=?");
+					 $statement->execute(array($id));
+					 $result=$statement->fetchAll(PDO::FETCH_ASSOC);
+					 foreach($result as $row)
+					 {
+						 ?>		 
 
             <!-- Blog Post Content Column -->
             <div class="col-lg-8">
 
                 <!-- Blog Post -->
 
+ <!-- Blog Post -->
+                <div class="post">
                 <!-- Title -->
-                <h1>Blog Post Title</h1>
-
-                <!-- Author -->
-                <p class="lead">
-                    by <a href="#">Start Bootstrap</a>
-                </p>
-
-                <hr>
-
+                <h3><?php echo $row['post_title'];?></h3>
                 <!-- Date/Time -->
-                <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
+                <p style="margin-top:5px;"><span class="glyphicon glyphicon-time" ></span> Posted on 
+				<?php
+				$post_date=$row['post_date'];
+				$post_day=substr($post_date,8,2);
+				$post_month=substr($post_date,5,2);
+				$post_year=substr($post_date,0,4);
+				
+				if($post_month=='01') {$post_month='Jan';}
+				if($post_month=='02') {$post_month='Feb';}
+			    if($post_month=='03') {$post_month='Mar';}
+				if($post_month=='04') {$post_month='Apr';}
+				if($post_month=='05') {$post_month='May';}
+				if($post_month=='06') {$post_month='Jun';}
+				if($post_month=='07') {$post_month='JUL';}
+				if($post_month=='08') {$post_month='Aug';}
+				if($post_month=='09') {$post_month='Sep';}
+				if($post_month=='10') {$post_month='Oct';}
+				if($post_month=='11') {$post_month='Nov';}
+				if($post_month=='12') {$post_month='Dec';}
+				
+				echo $post_day." ".$post_month.", ".$post_year; 	
+			?>
+				</p>
 
                 <hr>
-
+                
+				
                 <!-- Preview Image -->
-                <img class="img-responsive" src="images/xampp.jpg" alt="">
-
+                <img  src="admin/uploads/<?php echo $row['post_image'];?>" alt="" width="200px" height="150px" style="float:left;padding-right:10px;padding-bottom:7px">
+                  <hr>
+           				<p >
+					
+						<?php
+						     echo $row['post_description'];
+						?>
+						</p>
+           
                 <hr>
+				<p class="comments">Comments 
+				
 
-                <!-- Post Content -->
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
-
-                <hr>
+				<span>|</span>   <a href="blog2.php?id=<?php echo $row['post_id']; ?>">Continue Reading</a></p><br><br>
+				
+				</div>
+				<!--- Blog Post--->           
 
                 <!-- Blog Comments -->
 
@@ -96,6 +136,11 @@
                 </div>
 
             </div>
+			
+			
+			<?php
+					 }
+					 ?>
    <!-- Blog Sidebar Widgets Column -->
 			<div class="col-md-1"></div>
             <div class="col-md-3">

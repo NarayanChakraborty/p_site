@@ -159,27 +159,24 @@
                 
 				
                 <!-- Preview Image -->
-                <img  src="admin/uploads/<?php echo $row['post_image'];?>" alt="" width="200px" height="150px" style="float:left;padding:5px;">
-                
-                <hr>
-                 <div class="description">
-           				<p>
+                <img  src="admin/uploads/<?php echo $row['post_image'];?>" alt="" width="200px" height="150px" style="float:left;padding-right:10px;padding-bottom:7px">
+                  <hr>
+           				<p >
 						<?php
 						$pices=explode(" ",$row['post_description']);
-						$first_page=implode(" ",array_splice($pices,0,100));
+						$first_page=implode(" ",array_splice($pices,0,95));
 						$first_page=$first_page."<b> ..........</b>";
 						?>
 						<?php
 						     echo $first_page;
 						?>
 						</p>
-                  
-				</div>
+           
                 <hr>
 				<p class="comments">Comments 
 				
 
-				<span>|</span>   <a >Continue Reading</a></p><br><br>
+				<span>|</span>   <a href="blog2.php?id=<?php echo $row['post_id']; ?>">Continue Reading</a></p><br><br>
 				
 				</div>
 				<!--- Blog Post--->           

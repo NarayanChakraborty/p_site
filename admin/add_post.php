@@ -179,7 +179,7 @@ if(isset($_POST['form1']))
 	<tr><td><b>Description</b></td></tr>
 	<tr>
 		<td>
-			<textarea name="post_description" cols="100" rows="10"></textarea>
+			<textarea name="post_description" cols="60 rows="10"></textarea>
 				<script type="text/javascript">
 				if ( typeof CKEDITOR == 'undefined' )
 				{
