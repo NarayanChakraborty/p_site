@@ -7,7 +7,7 @@
                     <img src="../images/2.png" class="user-image img-responsive"/>
 					</li>			  
                   <li class="active">
-                      <a class="" href="index.html">
+                      <a class="" href="index.php">
                           <i class="icon_house_alt"></i>
                           <span>Dashboard</span>
                       </a>

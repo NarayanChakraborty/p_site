@@ -28,10 +28,7 @@
 	<link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
     <!-- Custom styles -->
 	<link rel="stylesheet" href="css/fullcalendar.css">
-
-
 		<link href="css/widgets.css" rel="stylesheet">
-
 	    <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
 	<link href="css/xcharts.min.css" rel=" stylesheet">	
@@ -47,8 +44,6 @@
 	<!----CKEditor Start---->
 <script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
 <!---//CKEditor End----->
-
-
 
   </head>
 
