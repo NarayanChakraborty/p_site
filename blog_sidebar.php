@@ -13,7 +13,7 @@
 							 foreach($result1 as $row1)
 							 {
 								 ?>
-								 <li><a href="#"><?php echo $row1['cat_name']; ?></a>
+								 <li><a href="category.php?id=<?php echo $row1['cat_id']; ?>"><?php echo $row1['cat_name']; ?></a></li>
                                 </li>
                               
 								 <?php
