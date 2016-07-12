@@ -161,6 +161,7 @@
                 <!-- Preview Image -->
                 <img  src="admin/uploads/<?php echo $row['post_image'];?>" alt="" width="200px" height="150px" style="float:left;padding-right:10px;padding-bottom:7px">
                   <hr>
+				  <div class="a">
            				<p >
 						<?php
 						$pices=explode(" ",$row['post_description']);
@@ -171,7 +172,7 @@
 						     echo $first_page;
 						?>
 						</p>
-           
+                 </div>
                 <hr>
 				<p class="comments">Comments 
 				

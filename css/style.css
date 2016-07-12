@@ -42,9 +42,9 @@ body a:hover{
 /*----*/
 /*--top-nav--*/
 .header {
-    margin: 1em 1em 0;
+    margin: 1.2em 1.2em 0;
     border-bottom: 5px solid #C7C2C2;
-    box-shadow: 1px 3px 1px #D0CFCF;
+    box-shadow: 1px 3px 1px 2px #D0CFCF;
 }
 .navbar-header h1 {
     font-size: 3em;
@@ -336,7 +336,7 @@ h3.title span {
 }
 .features p {
     font-size: 1em;
-    color: #999;
+    color: #000;
     line-height: 1.8em;
     margin-top: 2em;
 }
@@ -2852,4 +2852,8 @@ div.pagination span.disabled {
 .actionBox {
     border-top:1px dotted #bbb;
     padding:10px;
+}
+.a p{
+	font-family:regular;
+
 }

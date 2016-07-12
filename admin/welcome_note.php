@@ -22,7 +22,7 @@ if(isset($_POST['form1']))
 		   $statement=$db->prepare("update  tbl_welcome set description=? where id=?");
 		   $statement->execute(array($_POST['post_description'],1));
 		   
-		   $success_message="Post is inserted succesfully";
+		   $success_message="Post is updated succesfully";
 	}
 	
 	catch(Exception $e)
@@ -70,7 +70,14 @@ if(isset($error_message))
 <table class="tabl">
 	<tr>
 		<td>
-			<textarea name="post_description" cols="100" rows="10" required></textarea>
+		     <?php 
+			 $statement = $db->prepare("SELECT * FROM tbl_welcome");
+			$statement->execute();
+			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+			foreach($result as $row)
+			{
+			 ?>
+			<textarea name="post_description" cols="100" rows="10" required><?php echo  $row['description']; ?></textarea>
 				<script type="text/javascript">
 				if ( typeof CKEDITOR == 'undefined' )
 				{
@@ -88,6 +95,9 @@ if(isset($error_message))
 				}
 
 			</script>
+			<?php
+			}
+			?>
 		</td>
 	</tr>
 	<tr><td><input style="width:100px;"  type="submit" value="Save" name="form1"></td></tr>
