@@ -60,6 +60,7 @@ $id=$_REQUEST['id'];
 								$arr=explode(',',$row['tag_id']);
 								$arr_count=count(explode(',',$row['tag_id']));
 								$k=0;
+								$arr1=array();
 								for($j=0;$j<$arr_count;$j++)
 								{
 									 $statement1=$db->prepare("select * from tbl_tag where tag_id=?");

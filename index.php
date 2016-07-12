@@ -5,9 +5,10 @@ include_once('header.php');
 	<!--features-->
 	<div class="features">
 		<div class="container">
-			<div class="col-md-4 feature-grids">
-				<h3 class="title">WELCOME</span></h3>
-				<p>
+			<div class="col-md-7 ">
+				<h3 class="title" style="margin-bottom:10px;">WELCOME</h3><br>
+				<img src="images/2.JPG" class="user-image img-responsive"  height="320px" width="280px" style="float:left;margin-right:15px;margin-bottom:5px;margin-top:8px;"/>
+			
 				<?php 
 					$statement=$db->prepare("select description from tbl_welcome where id=1") ;
 			$statement->execute();
@@ -15,12 +16,11 @@ include_once('header.php');
 					echo $result['description'];	
 				?>
 				
-				</p>
-				
+		
 
 			</div>
-			<div class="col-md-4 feature-grids">
-				<img src="images/2.png" alt=""/>
+			<div class="col-md-1 feature-grids">
+				
 			</div>
 			<div class="col-md-4 feature-grids">
 				<h3 class="title">Recent Topics</h3>
