@@ -54,7 +54,29 @@ $id=$_REQUEST['id'];
 				if($post_month=='12') {$post_month='Dec';}
 				
 				echo $post_day." ".$post_month.", ".$post_year; 	
-			?>
+			?><span class="categories">&nbsp; Tags : <em>
+				<?php
+								//when retrive data (using explode)
+								$arr=explode(',',$row['tag_id']);
+								$arr_count=count(explode(',',$row['tag_id']));
+								$k=0;
+								for($j=0;$j<$arr_count;$j++)
+								{
+									 $statement1=$db->prepare("select * from tbl_tag where tag_id=?");
+									 $statement1->execute(array($arr[$j]));
+									 $result1=$statement1->fetchAll(PDO::FETCH_ASSOC);
+									 foreach($result1 as $row1)
+									 {
+										$arr1[$k]=$row1['tag_name'];  
+									 }
+								   $k++;
+                                }
+								$tag_names=implode(",",$arr1);
+								echo $tag_names;
+                              ?>	
+</em>							  
+				
+				</span>
 				</p>
 
                 <hr>
@@ -62,7 +84,7 @@ $id=$_REQUEST['id'];
 				
                 <!-- Preview Image -->
                 <img  src="admin/uploads/<?php echo $row['post_image'];?>" alt="" width="200px" height="150px" style="float:left;padding-right:10px;padding-bottom:7px">
-                  <hr>
+               
 				  <div class="a">
            				<p >
 					
