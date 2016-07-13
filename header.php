@@ -63,14 +63,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</ul>
 
 					</div>
-				<!--------
-					<div class="top-nav-text"style="margin-bottom:-10px;padding-top:10px;">
-						<ul>
-						<li >Developer : <a class="email-link" href="mailto:narayanchakraborty1993@gmail.com">narayanchakraborty1993@gmail.com</a>
-						</li>
-						</ul>
-				    </div>
-				----->
+
 				</div>
 		<!--//navigation-->
 				<div class="clearfix"> </div>
@@ -92,7 +85,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li ><a href="index.php">Home</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="about.php">About</a></li>
         <li><a href="blog.php">Blog</a></li> 
         <li><a href="contact.php">Contact</a></li> 
       </ul>

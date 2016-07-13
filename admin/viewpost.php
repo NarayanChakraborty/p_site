@@ -24,10 +24,8 @@ require_once('../config.php');
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="fa fa fa-bars"></i> Pages</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-						<li><i class="fa fa-bars"></i>Pages</li>
-						<li><i class="fa fa-square-o"></i>Pages</li>
-					</ol>
+						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
+				
 				</div>
 			</div>
               <!-- page start-->
@@ -139,12 +137,12 @@ foreach($result as $row)
 													  <a class="btn btn-success" title="Edit this Product" href="edit_post.php?id=<?php echo $row['post_id']; ?>"><i class="icon_check_alt2"></i>
 													  
 													  </a>
-													  <a class="btn btn-danger"  title="Delete This product" data-toggle="modal" data-target="#productModal<?php echo $row['p_id'];?>"><i class="icon_close_alt2"></i>
+													  <a class="btn btn-danger"  title="Delete This product" data-toggle="modal" data-target="#productModal<?php echo $row['post_id'];?>"><i class="icon_close_alt2"></i>
 													   </a>
 													  
 																		  
 											<!-- Modal -->
-													<div id="productModal<?php echo $row['p_id'];?>" class="modal fade " role="dialog">
+													<div id="productModal<?php echo $row['post_id'];?>" class="modal fade " role="dialog">
 													  <div class="modal-dialog">
 
 														<!-- Modal content-->
@@ -158,7 +156,7 @@ foreach($result as $row)
 														  </div>
 														  <div class="modal-footer">
 															<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-															<a class="btn btn-danger btn-ok" href="product_delete.php?id=<?php echo $row['p_id']; ?>" >Confirm</a>
+															<a class="btn btn-danger btn-ok" href="delete_post.php?id=<?php echo $row['post_id']; ?>" >Confirm</a>
 														  </div>
 														</div>
 

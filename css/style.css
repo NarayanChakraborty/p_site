@@ -63,7 +63,8 @@ body a:hover{
 	background:none !important;
 }
 .navbar-nav > li {
-    margin-right: 2.5em;
+    padding-left:10px;
+	padding-right:10px;
 }
 .navbar-nav > li > a {
     font-size: 1.1em;
@@ -1611,9 +1612,7 @@ h2.typoh2{
     font-size: 1em;
     line-height: 32px;
 }
-.navbar-nav > li {
-    margin-right: 2.3em;
-}
+
 ul.nav.navbar-nav.navbar-left {
     float: right !important;
 }
@@ -2711,6 +2710,7 @@ h3.title1 {
 #myNavbar ul li{
 	border-left:1px solid #fff;
 }
+
 /* From my Blog Website*/
 .post{
 	margin-top:10px;
@@ -2850,32 +2850,6 @@ div.pagination span.disabled {
 	font-family:regular;
 
 }
-/* developer tab */
-@media (max-width: 1366px)
-.navbar-collapse.bs-example-js-navbar-scrollspy .nav > li > a {
-    padding: 15px 8px;
-    font-size: 0.9em;
-}
-@media (max-width: 1366px)
-.navbar-collapse.bs-example-js-navbar-scrollspy .nav > li > a {
-    padding: 15px 11px;
-}
-@media (max-width: 1440px)
-.navbar-collapse.bs-example-js-navbar-scrollspy .nav > li > a {
-    padding: 15px 13px;
-}
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-    color: #333;
-    background-color: transparent;
-}
-.nav > li > a:hover, .nav > li > a:focus {
-    text-decoration: none;
-    background-color: transparent;
-    color: #F2B33F;
-}
-.b li{
-	display:inline-block;
-	overflow:hidden;
-	outline:none;
-	list-style:none;
+#myNavbar ul li a{
+	margin:0 auto;
 }
