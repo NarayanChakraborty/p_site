@@ -1,8 +1,8 @@
  <!-- Blog Categories Well -->
                 <div class="well">
-                    <h4>Blog Categories</h4>
+                    <h4>Blog Categories</h4><br>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-md-12 col-xs-6">
                             <ul class="list-unstyled">
 							
 						     <?php 
@@ -29,7 +29,8 @@
                 </div>
 
                 <div class="well">
-                    <h4>Archives</h4>
+
+                    <h4>Archives</h4><br>
 							<?php
 				     $j=0;
 					 $statement=$db->prepare("select distinct(post_date) from tbl_post order by post_date desc");
@@ -51,7 +52,7 @@
 					 ?> 
 					
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12 col-xs-6">
                             <ul class="list-unstyled">
                               		    <?php 
 					for($j=0;$j<$final_arr_date_count;$j++)
@@ -83,6 +84,34 @@
                             </ul>
                         </div>
 
+                    </div>
+                    <!-- /.row -->
+                </div>
+				<div class="well">
+                    <h4>Blog Tags</h4><br>
+                    <div class="row">
+                        <div class="col-lg-12 col-xs-6">
+                            <ul class="list-unstyled">
+							
+						     <?php 
+							
+							 $statement1=$db->prepare("select * from tbl_tag");
+							 $statement1->execute();
+							 $result1=$statement1->fetchALl();
+							 foreach($result1 as $row1)
+							 {
+								 ?>
+								 <a href="" class="btn btn-default disabled"><?php echo $row1['tag_name']; ?></a>
+                                
+                              
+								 <?php
+							 }
+							 
+							 ?>
+							   
+                            </ul>
+                        </div>
+                
                     </div>
                     <!-- /.row -->
                 </div>

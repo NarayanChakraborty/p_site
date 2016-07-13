@@ -98,20 +98,41 @@ $id=$_REQUEST['id'];
 
 				
 				</div>
-				<!--- Blog Post--->           
+				<!--- Blog Post--->    
+ <ul class="pager">
+    <li class="previous"><a href="blog.php">←Back to Blogs</a></li>
+</ul>				
 
                 <!-- Blog Comments -->
 
                 <!-- Comments Form -->
-                <div class="well">
-                    <h4>Leave a Comment:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
+   <div class="well">
+ 
+    <h4>Leave a comment</h4>
+ 
+    <form role="form" class="clearfix">
+ 
+        <div class="col-md-6 form-group">
+            <label class="sr-only" for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Name">
+        </div>
+ 
+        <div class="col-md-6 form-group">
+            <label class="sr-only" for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Email">
+        </div>
+ 
+        <div class="col-md-12 form-group">
+            <label class="sr-only" for="email">Comment</label>
+            <textarea class="form-control" id="comment" placeholder="Comment"></textarea>
+        </div>
+ 
+        <div class="col-md-12 form-group text-right">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+ 
+    </form>
+</div>
 
                 <hr>
 
