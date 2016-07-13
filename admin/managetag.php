@@ -91,15 +91,7 @@ require_once('../config.php');
 
  <h2>Add new Tag</h2>
 		  <?php
-		if(isset($error_message))
-		{
-		  echo "<div class='error'>".$error_message."</div>";
-		}
-		if(isset($success_msg))
-		{
-			echo "<div class='success'>".$success_msg."</div>";
-		}
-		?>	
+	
 <form action="" method="post">
 <table class="tabl">
     <tr>

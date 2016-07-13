@@ -3,7 +3,7 @@
 		<div class="container">
 			<h3 class="title1">Contact With Me</h3>
 			<div class="contact-info">
-				<div class="col-md-8 contact-grids">
+				<div class="col-md-9 contact-grids">
 					<h5>Do you have any question? Please use the below contact form and send a message. I'll reply you as quick as possible.</h5>
 					
 					<div class="contact-form">
@@ -28,20 +28,8 @@
 						</form>
 					</div>
 				</div>
-				<div class="col-md-4 contact-grids">
-					<div class="cnt-address">
-						<h3 class="title1">Address</h3>
-						<h4>Headquarters</h4>
-						<p>123 T. Globel Place.
-							<span>CG 09-123</span>
-							Italy, Ba. 4567
-						</p>
-						<h4>Get In Touch</h4>
-						<p>Telephone: +1 234 567 9871
-							<span>FAX: +1 234 567 9871</span>
-							E-mail: <a href="mailto:info@example.com">mail@example.com</a>
-						</p>
-					</div>
+				<div class="col-md-3 contact-grids">
+			
 				</div>
 				<div class="clearfix"> </div>
 			</div>

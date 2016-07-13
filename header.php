@@ -87,6 +87,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <li ><a href="index.php">Home</a></li>
         <li><a href="about.php">About</a></li>
         <li><a href="blog.php">Blog</a></li> 
+	
         <li><a href="contact.php">Contact</a></li> 
       </ul>
       <ul class="nav navbar-nav navbar-right">

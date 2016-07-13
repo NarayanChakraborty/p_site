@@ -1,4 +1,3 @@
-
 <?php
 ob_start();
 session_start();
@@ -6,30 +5,67 @@ if($_SESSION['name']!='snchousebd')
 {
 header('location: login.php');
 }
-include('../config.php');
+require_once('../config.php');
 ?>
 
 
-<?php
 
-if(isset($_POST['form1']))
-{
-	try{  
-		
-		   
-		   
-		   //pdo to insert all above informations.. to tbl_post
-		   $statement=$db->prepare("update  tbl_welcome set description=? where id=?");
-		   $statement->execute(array($_POST['post_description'],1));
-		   
-		   $success_message="Post is inserted succesfully";
-	}
-	
-	catch(Exception $e)
+
+
+<?php
+ //form1 to insert data
+ if(isset($_POST['form1']))
+ {
+	 try{
+		 if(empty($_POST['tag_name']))
+		 {
+			 throw new Exception("Tag Name can not be empty");
+		 }
+				 //SearchSql and PDO
+		$statement=$db->prepare("select * from tbl_tag where tag_name=?");
+		$statement->execute(array($_POST['tag_name']));
+		$total=$statement->rowCount();
+		if($total>0)
+		{
+		  throw new Exception("Category Name already exists");
+		}
+		$statement=$db->prepare("insert into tbl_tag(tag_name) values(?)");
+		$statement->execute(array($_POST['tag_name']));
+		$success_message1="Tag Name has been successfully inserted";
+
+	 }
+     catch(Exception $e)
+	 {
+		$error_message1=$e->getMessage();
+	 }
+	 
+ }
+ 
+ 
+  //Form2 to update data
+ 
+
+ 
+ 	if(isset($_POST['form_edit_tag']))
 	{
-		$error_message=$e->getMessage();
+		try{
+			if(empty($_POST['edit_tag_name']))
+			{
+				throw new Exception('Tag Name Can not be Empty');
+			}
+			
+			$cat_name=mysql_real_escape_string($_POST['edit_tag_name']);
+			$statement1=$db->prepare('update tbl_tag set tag_name=? where tag_id=?');
+			$statement1->execute(array($cat_name,$_POST['hidden_id_for_edit_tag']));
+						
+			
+			$success_message2='Tag Name Successfully Updated';
+		}
+		catch(Exception $e)
+		{
+		    $error_message2=$e->getMessage();	
+		}
 	}
-}
 ?>
 
 <?php include_once('header.php'); ?>
@@ -42,10 +78,9 @@ if(isset($_POST['form1']))
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					
+					<h3 class="page-header"><i class="fa fa fa-bars"></i> Pages</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-						<li><i class="fa fa-bars"></i>Pages</li>
+						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
 						<li><i class="fa fa-square-o"></i>Pages</li>
 					</ol>
 				</div>
@@ -54,74 +89,15 @@ if(isset($_POST['form1']))
 
 
 
-<div style="margin-left:30px;">
-                                  <!-- edit-profile -->
-                                  <div id="edit-profile" class="tab-pane">
-                                    <section class="panel">                                          
-                                          <div class="panel-body bio-graph-info">
-                                              <h1> Profile Info</h1>
-                                              <form class="form-horizontal" role="form">                                                  
-                                                  <div class="form-group">
-                                                      <label class="col-lg-2 control-label">First Name</label>
-                                                      <div class="col-lg-4">
-                                                          <input type="text" class="form-control" id="f-name" placeholder=" ">
-                                                      </div>
-                                                  </div>
-                                                  <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Last Name</label>
-                                                      <div class="col-lg-4">
-                                                          <input type="text" class="form-control" id="l-name" placeholder=" ">
-                                                      </div>
-                                                  </div>
-                                                  <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Present Status</label>
-                                                      <div class="col-lg-8">
-                                                          <textarea name="" id="" class="form-control" cols="30" rows="5"></textarea>
-                                                      </div>
-                                                  </div>
-                                           <div class="form-group">
-                                                      <div class="col-lg-offset-2 col-lg-10">
-                                                          <button type="submit" class="btn btn-primary">Update</button>
-                                                        
-                                                      </div>
-                                                  </div>
-                                              </form>
-                                          </div>
-                                      </section>
-                                  </div>
-								  
-								  
-								        <section class="panel">                                          
-                                          <div class="panel-body bio-graph-info">
-                                              <h1>Add New Achievement</h1>
-                                              <form class="form-horizontal" role="form">                                                  
-                                                  <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Achievement Title</label>
-                                                      <div class="col-lg-6">
-                                                          <input type="text" name="title"  class="form-control" id="f-name" placeholder=" ">
-                                                      </div>
-                                                  </div>
-                                              
-                                                  <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Description</label>
-                                                      <div class="col-lg-8">
-                                                          <textarea name="" id="" name="details" class="form-control" cols="30" rows="5"></textarea>
-                                                      </div>
-                                                  </div>
-                                           <div class="form-group">
-                                                      <div class="col-lg-offset-2 col-lg-10">
-                                                          <button type="submit" name="form2" class="btn btn-primary">Save</button>
-                                                        
-                                                      </div>
-                                                  </div>
-                                              </form>
-                                          </div>
-                                      </section>
-<h2>View All Achievements</h2>  
+	
+
+<!---View All Category---->
+
+<h2>View All Tags</h2>  
 <table class="tabl2" width="100%">
 <tr>
     <th width="5%">Serial</th>
-	<th width="75%">Title</th>
+	<th width="75%">Tag Name</th>
 	<th width="20%">Action</th>
 </tr>
 
@@ -270,3 +246,4 @@ foreach($result as $row)
 ?>
 </table>	
 <?php include("footer.php"); ?>   
+		  
