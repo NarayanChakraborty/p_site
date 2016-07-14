@@ -1,13 +1,4 @@
-<?php
-ob_start();
-session_start();
-if($_SESSION['name']!='snchousebd')
-{
-header('location: login.php');
-}
-require_once('../config.php');
-?>
-    
+
 	<!--sidebar start-->
       <aside>
           <div id="sidebar"  class="nav-collapse ">

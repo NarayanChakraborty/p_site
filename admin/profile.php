@@ -11,25 +11,68 @@ include('../config.php');
 
 
 <?php
-
-if(isset($_POST['form1']))
-{
-	try{  
-		
-		   
-		   
-		   //pdo to insert all above informations.. to tbl_post
-		   $statement=$db->prepare("update  tbl_welcome set description=? where id=?");
-		   $statement->execute(array($_POST['post_description'],1));
-		   
-		   $success_message="Post is inserted succesfully";
-	}
-	
-	catch(Exception $e)
+ //form1 to insert data
+ if(isset($_POST['form2']))
+ {
+	 try{
+		 if(empty($_POST['a_title']))
+		 {
+			 throw new Exception("Achievement Title can not be empty");
+		 } 
+		 if(empty($_POST['a_details']))
+		 {
+			 throw new Exception("Achievement Details can not be empty");
+		 }
+				 //SearchSql and PDO
+		$statement=$db->prepare("select * from tbl_achievements where achievement_title=?");
+		$statement->execute(array($_POST['a_title']));
+		$total=$statement->rowCount();
+		if($total>0)
+		{
+		  throw new Exception("This Achievement  already exists");
+		}
+		$statement=$db->prepare("insert into tbl_achievements(achievement_title,achievement_details) values(?,?)");
+		$statement->execute(array($_POST['a_title'],$_POST['a_details']));
+	$success_message1='New Achievement Successfully Inserted';
+		}
+		catch(Exception $e)
+		{
+		    $error_message1=$e->getMessage();	
+		}
+	 
+ }
+ 
+  //Form2 to update data
+ 
+ 
+ 	if(isset($_POST['form_edit_achievement']))
 	{
-		$error_message=$e->getMessage();
+		try{
+			 if(empty($_POST['a_title']))
+		 {
+			 throw new Exception("Achievement Title can not be empty");
+		 } 
+		 if(empty($_POST['a_details']))
+		 {
+			 throw new Exception("Achievement Details can not be empty");
+		 }
+			
+			$a_title=mysql_real_escape_string($_POST['a_title']);
+			$a_details=mysql_real_escape_string($_POST['a_details']);
+			$statement1=$db->prepare("update tbl_achievements set achievement_title=? , achievement_details=? where achievement_id=?");
+			$statement1->execute(array($a_title,$a_details,$_POST['hidden_id_for_edit_achievement']));
+						
+			
+			$success_message2='Achievement Details Successfully Updated';
+		}
+		catch(Exception $e)
+		{
+		    $error_message2=$e->getMessage();	
+		}
 	}
-}
+
+
+ 
 ?>
 
 <?php include_once('header.php'); ?>
@@ -94,23 +137,23 @@ if(isset($_POST['form1']))
 								        <section class="panel">                                          
                                           <div class="panel-body bio-graph-info">
                                               <h1>Add New Achievement</h1>
-                                              <form class="form-horizontal" role="form">                                                  
+                                              <form class="form-horizontal" role="form" method="post" action="profile.php">                                                  
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Achievement Title</label>
                                                       <div class="col-lg-6">
-                                                          <input type="text" name="title"  class="form-control" id="f-name" placeholder=" ">
+                                                          <input type="text" name="a_title"  class="form-control" id="f-name" placeholder=" ">
                                                       </div>
                                                   </div>
                                               
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Description</label>
                                                       <div class="col-lg-8">
-                                                          <textarea name="" id="" name="details" class="form-control" cols="30" rows="5"></textarea>
+                                                          <textarea  name="a_details" class="form-control" cols="30" rows="5"></textarea>
                                                       </div>
                                                   </div>
                                            <div class="form-group">
                                                       <div class="col-lg-offset-2 col-lg-10">
-                                                          <button type="submit" name="form2" class="btn btn-primary">Save</button>
+                                                          <button type="submit" name="form2" class="btn btn-primary" >Save</button>
                                                         
                                                       </div>
                                                   </div>
@@ -178,7 +221,7 @@ if(isset($_POST['form1']))
 		
 <?php
 $i=0;
-$statement=$db->prepare("select * from tbl_tag order by tag_name asc");
+$statement=$db->prepare("select * from tbl_achievements order by achievement_title asc");
 $statement->execute();
 $result=$statement->fetchAll(PDO::FETCH_ASSOC); 
 if($result==null)
@@ -195,28 +238,30 @@ foreach($result as $row)
     <td><?php echo $i; ?></td>
     <td>
 
-	<?php echo $row['tag_name'];?></td>
-    <td><a class="btn btn-info " data-toggle="modal" href="#myModal<?php echo $row['tag_id'];?>">
+	<?php echo $row['achievement_title'];?></td>
+    <td><a class="btn btn-info " data-toggle="modal" href="#myModal<?php echo $row['achievement_id'];?>">
                                 Edit
                               </a>
 							 
 								<!---- For Edit------->
 							  
 	                  <!-- Modal -->
-							  <div class="modal fade" id="myModal<?php echo $row['tag_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal fade" id="myModal<?php echo $row['achievement_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 								  <div class="modal-content">
 									<div class="modal-header">
 									  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									  <h4 class="modal-title">Edit This Tag Name</h4>
+									  <h4 class="modal-title">Edit Your Achievement</h4>
 									</div>
 									<div class="modal-body">
-									  <h4>Tag Name :</h4>
+									  <h4>Achievement Title:</h4>
 									  <form method="post" action="" enctype="multipart/form-data">
-										<input type="text"value="<?php echo $row['tag_name'];?>"class="form-control" name="edit_tag_name"><br>
+										<input type="text"value="<?php echo $row['achievement_title'];?>"class="form-control" name="a_title"><br>
+										<h4>Achievement Description :</h4>
+										<textarea  name="a_details" name="a_details" class="form-control" cols="30" rows="5"><?php echo $row['achievement_details']; ?></textarea>
 										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-										<input type="hidden" name="hidden_id_for_edit_tag" value="<?php echo $row['tag_id'];?>">
-										<input type="submit" value="Update" class="btn btn-success" name="form_edit_tag">
+										<input type="hidden" name="hidden_id_for_edit_achievement" value="<?php echo $row['achievement_id'];?>">
+										<input type="submit" value="Update" class="btn btn-success" name="form_edit_achievement">
 									  </form>
 									</div>         
 								  </div>

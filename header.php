@@ -37,7 +37,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <body>
 	<!--header-->
-	<div class="header" >
+	<div class="header" style="background-color:#f6f6f6">
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header navbar-left">
