@@ -11,7 +11,48 @@ include('../config.php');
 
 
 <?php
- //form1 to insert data
+//form1 to Update data
+ if(isset($_POST['form1']))
+ {
+	 try{
+		 if(empty($_POST['f_name']))
+		 {
+			 throw new Exception("First Name can not be  empty");
+		 } 
+		 if(empty($_POST['l_name']))
+		 {
+			 throw new Exception("Last Name can not be empty");
+		 }		
+		 if(empty($_POST['email']))
+		 {
+			 throw new Exception("Email Name can not be empty");
+		 }	
+		  if(empty($_POST['f_quote']))
+		 {
+			 throw new Exception("Quotation can not be empty");
+		 }	
+		 if(empty($_POST['p_status']))
+		 {
+			 throw new Exception("Last Name can not be empty");
+		 }
+				 //SearchSql and PDO
+	       $statement2=$db->prepare("update  tbl_status set f_name=?,l_name=?,email=?,f_quote=?,p_status=? where s_id=?");
+		   $statement2->execute(array($_POST['f_name'],$_POST['l_name'],$_POST['email'],$_POST['f_quote'],$_POST['p_status'],1));
+		   
+		   $success_message="Status is updated succesfully";
+		}
+		catch(Exception $e)
+		{
+		    $error_message=$e->getMessage();	
+		}
+	 
+ }
+
+
+
+
+
+ //form2 to insert data
  if(isset($_POST['form2']))
  {
 	 try{
@@ -42,7 +83,7 @@ include('../config.php');
 	 
  }
  
-  //Form2 to update data
+  //Form3 to update data
  
  
  	if(isset($_POST['form_edit_achievement']))
@@ -103,32 +144,89 @@ include('../config.php');
                                     <section class="panel">                                          
                                           <div class="panel-body bio-graph-info">
                                               <h1> Profile Info</h1>
-                                              <form class="form-horizontal" role="form">                                                  
+
+
+											  <?php	
+					 if(isset($error_message)){
+                        ?>
+                        <div class="alert alert-block alert-danger fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Opps!&nbsp; </strong><?php echo $error_message;?>
+                       </div>
+                        <?php
+                      }
+                      if (isset($success_message)) {
+                       ?>
+                       <div class="alert alert-success fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Well done!&nbsp; </strong><?php echo $success_message;?>
+                       </div>
+                       <?php
+                        }
+                      ?>
+											  
+											  <?php 
+											  
+											  $statement1=$db->prepare("select * from tbl_status where s_id=?");
+												$statement1->execute(array(1));
+												$result1=$statement1->fetchAll(PDO::FETCH_ASSOC); 
+												foreach($result1 as $row1)
+												{
+													?>
+													         <form class="form-horizontal" role="form" method="post" >                                                  
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">First Name</label>
                                                       <div class="col-lg-4">
-                                                          <input type="text" class="form-control" id="f-name" placeholder=" ">
+                                                          <input type="text" value="<?php echo $row1['f_name']; ?> " name="f_name" class="form-control" id="f-name" placeholder=" ">
                                                       </div>
                                                   </div>
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Last Name</label>
                                                       <div class="col-lg-4">
-                                                          <input type="text" class="form-control" id="l-name" placeholder=" ">
+                                                          <input type="text"value="<?php echo $row1['l_name']; ?> "  name="l_name" class="form-control" id="l-name" placeholder=" ">
+                                                      </div>
+                                                  </div>
+												   <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Email</label>
+                                                      <div class="col-lg-4">
+                                                          <input type="email"value="<?php echo $row1['email']; ?> "  name="email" class="form-control" id="l-name" placeholder=" ">
+                                                      </div>
+                                                  </div>
+												   <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Favourite Quotation</label>
+                                                      <div class="col-lg-4">
+                                                          <input type="text"value="<?php echo $row1['f_quote']; ?> "  name="f_quote" class="form-control" id="l-name" placeholder=" ">
                                                       </div>
                                                   </div>
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Present Status</label>
                                                       <div class="col-lg-8">
-                                                          <textarea name="" id="" class="form-control" cols="30" rows="5"></textarea>
-                                                      </div>
+                                                          <textarea name="p_status"  id="" placeholder="use <br> to display next line" class="form-control" cols="30" rows="5"><?php echo $row1['p_status']; ?></textarea>
+                                                          <span class="help-block with-errors">To seperate line, use <br> at the end of the line </span>
+													 </div>
                                                   </div>
                                            <div class="form-group">
                                                       <div class="col-lg-offset-2 col-lg-10">
-                                                          <button type="submit" class="btn btn-primary">Update</button>
+                                                          <button type="submit" name="form1" class="btn btn-primary">Update</button>
                                                         
                                                       </div>
                                                   </div>
                                               </form>
+													
+													
+													<?php
+												}
+											  
+											  ?>
+											  
+											  
+											  
+											  
+                                     
                                           </div>
                                       </section>
                                   </div>
@@ -137,6 +235,31 @@ include('../config.php');
 								        <section class="panel">                                          
                                           <div class="panel-body bio-graph-info">
                                               <h1>Add New Achievement</h1>
+											  
+											  <?php	
+					 if(isset($error_message1)){
+                        ?>
+                        <div class="alert alert-block alert-danger fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Opps!&nbsp; </strong><?php echo $error_message1;?>
+                       </div>
+                        <?php
+                      }
+                      if (isset($success_message1)) {
+                       ?>
+                       <div class="alert alert-success fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Well done!&nbsp; </strong><?php echo $success_message1;?>
+                       </div>
+                       <?php
+                        }
+                      ?>
+											  
+											  
                                               <form class="form-horizontal" role="form" method="post" action="profile.php">                                                  
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Achievement Title</label>
@@ -169,28 +292,7 @@ include('../config.php');
 </tr>
 
 <!-------SQL with PDO to fetch all category----->
-		<?php	
-					 if(isset($error_message1)){
-                        ?>
-                        <div class="alert alert-block alert-danger fade in">
-                          <button data-dismiss="alert" class="close close-sm" type="button">
-                          <i class="icon-remove"> X</i>
-                          </button>
-                          <strong>Opps!&nbsp; </strong><?php echo $error_message1;?>
-                       </div>
-                        <?php
-                      }
-                      if (isset($success_message1)) {
-                       ?>
-                       <div class="alert alert-success fade in">
-                          <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"> X</i>
-                          </button>
-                          <strong>Well done!&nbsp; </strong><?php echo $success_message1;?>
-                       </div>
-                       <?php
-                        }
-                      ?>
+		
 					 
 					 <?php
                       if(isset($error_message2)){
@@ -273,7 +375,7 @@ foreach($result as $row)
 	&nbsp;|&nbsp;
 	
 	  <a class="btn btn-danger " data-toggle="modal"
-							  data-target="#MyModal<?php echo $row['tag_id'];?>"  >
+							  data-target="#MyModal<?php echo $row['achievement_id'];?>"  >
                                   Delete!
                               </a>
 	</td>
@@ -282,7 +384,7 @@ foreach($result as $row)
 	 <!-------------FOR Delete-------------->
 							  
 							  <!-- Modal -->
-								<div id="MyModal<?php echo $row['tag_id'];?>" class="modal fade " role="dialog">
+								<div id="MyModal<?php echo $row['achievement_id'];?>" class="modal fade " role="dialog">
 								  <div class="modal-dialog">
 
 									<!-- Modal content-->
@@ -296,7 +398,7 @@ foreach($result as $row)
 									  </div>
 									  <div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-										<a class="btn btn-danger btn-ok" href="delete_tag.php?ID=<?php echo $row['tag_id'];?>" >Confirm</a>
+										<a class="btn btn-danger btn-ok" href="delete_achievements.php?ID=<?php echo $row['achievement_id'];?>" >Confirm</a>
 									  </div>
 									</div>
 

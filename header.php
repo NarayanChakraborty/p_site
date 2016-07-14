@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-<title>We Care a Medical Category Flat Bootstrap Responsive website Template | Home :: w3layouts</title>
+<title>Personal Website | Home :: Masud Kaium</title>
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -40,19 +40,30 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="header" style="background-color:#f6f6f6">
 		<nav class="navbar navbar-default">
 			<div class="container">
+			
+			<?php 
+											  include_once('config.php');
+											  $statement1=$db->prepare("select * from tbl_status where s_id=?");
+												$statement1->execute(array(1));
+												$result1=$statement1->fetchAll(PDO::FETCH_ASSOC); 
+												foreach($result1 as $row1)
+												{
+													?>
+			
 				<div class="navbar-header navbar-left">
-					<h1><a href="index.php">Masud Kaium</a></h1>
+					<h1><a href="index.php"><?php echo $row1['f_name'].$row1['l_name']; ?></a></h1>
 				</div>
+		
 				<!--navigation-->
 				<div class="header-text navbar-left" style="margin-top:20px;">
-					<p>“Success is a science; if you have the conditions, you get the result.”<p>
+					<p><?php echo $row1['f_quote']; ?><p>
 				</div>
 
 				<div class="header-right">
 					<div class="top-nav-text">
 						<ul>
 						
-							<li >Me : <a class="email-link" href="mailto:example@mail.com">mail@example.com</a></li>
+							<li >Me : <a class="email-link" href="mailto:example@mail.com"><?php echo $row1['email']; ?> </a></li>
 							<li>
 								<ul class="social-icons">
 									<li><a href="#"></a></li>
@@ -64,7 +75,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 					</div>
 
-				</div>
+				</div>		<?php
+												}
+												?>
+				
 		<!--//navigation-->
 				<div class="clearfix"> </div>
 							<!-- Collect the nav links, forms, and other content for toggling -->

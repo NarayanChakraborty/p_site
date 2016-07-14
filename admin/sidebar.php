@@ -22,7 +22,7 @@
                       <ul class="sub">
                           <li><a class="" href="welcome_note.php">Welcome Note</a></li>                          
                           <li><a class="" href="#">Manage Gallary</a></li>
-						  <li><a class="" href="profile.php">About Section</a></li>
+						  <li><a class="" href="about_me.php">About Section</a></li>
                       </ul>
                   </li>       
                   <li class="sub-menu">

@@ -56,9 +56,21 @@
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
             </div>
-
+			
+			<?php 
+											  
+											  $statement1=$db->prepare("select * from tbl_status where s_id=?");
+												$statement1->execute(array(1));
+												$result1=$statement1->fetchAll(PDO::FETCH_ASSOC); 
+												foreach($result1 as $row1)
+												{
+													?>
+			
             <!--logo start-->
-            <a href="index.php" class="logo">Masud <span class="lite">Kaium</span></a>
+            <a href="index.php" class="logo"><?php echo $row1['f_name']; ?> <span class="lite"><?php echo $row1['l_name']; ?></span></a>
+			<?php
+												}
+												?>
             <!--logo end-->
 
             <div  id="top_menu">
