@@ -34,36 +34,41 @@ include_once('header.php');
 			</div>
 			<div class="col-md-4 feature-grids">
 				<h3 class="title">Recent Topics</h3>
+				
+							<?php 
+					$statement=$db->prepare("select * from tbl_post ORDER BY post_date DESC LIMIT 3") ;
+			$statement->execute(array(1));
+            $result=$statement->fetchAll(PDO::FETCH_ASSOC);
+			$i=1;
+			foreach($result as $row)
+			{
+				?>
 				<div class="pince">
 					<div class="pince-left">
-						<h5>01</h5>
+						<h5><?php echo $i++; ?></h5>
 					</div>
 					<div class="pince-right">
-						<h4>Quasellus eget purus mauris </h4>
-						<p>Vero vulputate enim non justo posuereces placerat vel mauris.</p>
+						<h4><a href="blog2.php?id=<?php echo $row['post_id']; ?>"><?php echo $row['post_title']; ?></h4></a>
+						<span style="font-size: 1em;
+    color: rgba(0, 0, 0, 0.64);
+	  font-family: "Times New Roman", Times, serif;"
+   ">
+	                      <small>
+						<?php
+						$pices=explode(" ",$row['post_description']);
+						$first_page=implode(" ",array_splice($pices,0,15));
+						
+						?>
+						<?php
+						     echo $first_page;
+						?>
+						</small>
+						</span>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
-				<div class="pince">
-					<div class="pince-left">
-						<h5>02</h5>
-					</div>
-					<div class="pince-right">
-						<h4>Quasellus eget purus mauris </h4>
-						<p>Vero vulputate enim non justo posuere placerat Phasellus mauris.</p>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class="pince">
-					<div class="pince-left">
-						<h5>03</h5>
-					</div>
-					<div class="pince-right">
-						<h4>Quasellus eget purus mauris </h4>
-						<p>Vero vulputate enim non justo posuere placerat eget.</p>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
+				<?php
+			}?>
 			</div>
 			<div class="clearfix"> </div>
 		</div>
