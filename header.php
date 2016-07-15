@@ -43,7 +43,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			
 			<?php 
 											  include_once('config.php');
-											  $statement1=$db->prepare("select * from tbl_status where s_id=?");
+											  $statement1=$db->prepare("select * from tbl_welcome where id=?");
 												$statement1->execute(array(1));
 												$result1=$statement1->fetchAll(PDO::FETCH_ASSOC); 
 												foreach($result1 as $row1)
@@ -55,8 +55,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 		
 				<!--navigation-->
-				<div class="header-text navbar-left" style="margin-top:20px;">
-					<p><?php echo $row1['f_quote']; ?><p>
+				<div class="header-text navbar-left" style="margin-top:25px;">
+					<p><?php echo ' " '. $row1['f_quote'].' " '; ?><p>
 				</div>
 
 				<div class="header-right">

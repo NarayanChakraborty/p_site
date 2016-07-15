@@ -15,29 +15,14 @@ include('../config.php');
  if(isset($_POST['form1']))
  {
 	 try{
-		 if(empty($_POST['f_name']))
-		 {
-			 throw new Exception("First Name can not be  empty");
-		 } 
-		 if(empty($_POST['l_name']))
-		 {
-			 throw new Exception("Last Name can not be empty");
-		 }		
-		 if(empty($_POST['email']))
-		 {
-			 throw new Exception("Email Name can not be empty");
-		 }	
-		  if(empty($_POST['f_quote']))
-		 {
-			 throw new Exception("Quotation can not be empty");
-		 }	
+	
 		 if(empty($_POST['p_status']))
 		 {
-			 throw new Exception("Last Name can not be empty");
+			 throw new Exception("Status can not be empty");
 		 }
 				 //SearchSql and PDO
-	       $statement2=$db->prepare("update  tbl_status set f_name=?,l_name=?,email=?,f_quote=?,p_status=? where s_id=?");
-		   $statement2->execute(array($_POST['f_name'],$_POST['l_name'],$_POST['email'],$_POST['f_quote'],$_POST['p_status'],1));
+	       $statement2=$db->prepare("update  tbl_status set p_status=? where s_id=?");
+		   $statement2->execute(array($_POST['p_status'],1));
 		   
 		   $success_message="Status is updated succesfully";
 		}
@@ -177,31 +162,8 @@ include('../config.php');
 												foreach($result1 as $row1)
 												{
 													?>
-													         <form class="form-horizontal" role="form" method="post" >                                                  
-                                                  <div class="form-group">
-                                                      <label class="col-lg-2 control-label">First Name</label>
-                                                      <div class="col-lg-4">
-                                                          <input type="text" value="<?php echo $row1['f_name']; ?> " name="f_name" class="form-control" id="f-name" placeholder=" ">
-                                                      </div>
-                                                  </div>
-                                                  <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Last Name</label>
-                                                      <div class="col-lg-4">
-                                                          <input type="text"value="<?php echo $row1['l_name']; ?> "  name="l_name" class="form-control" id="l-name" placeholder=" ">
-                                                      </div>
-                                                  </div>
-												   <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Email</label>
-                                                      <div class="col-lg-4">
-                                                          <input type="email"value="<?php echo $row1['email']; ?> "  name="email" class="form-control" id="l-name" placeholder=" ">
-                                                      </div>
-                                                  </div>
-												   <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Favourite Quotation</label>
-                                                      <div class="col-lg-4">
-                                                          <input type="text"value="<?php echo $row1['f_quote']; ?> "  name="f_quote" class="form-control" id="l-name" placeholder=" ">
-                                                      </div>
-                                                  </div>
+											<form class="form-horizontal" role="form" method="post" >                                                  
+                                                 
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Present Status</label>
                                                       <div class="col-lg-8">

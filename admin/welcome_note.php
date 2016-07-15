@@ -12,17 +12,53 @@ include('../config.php');
 
 <?php
 
-if(isset($_POST['form1']))
+if(isset($_POST['form']))
 {
 	try{  
+	
+	
+
+		 if($_FILES['post_image']['size']>2000000){
+		 throw new Exception("Sorry,your file is too large"); //image file must be<1MB
+		 }
 		
-		   
-		   
-		   //pdo to insert all above informations.. to tbl_post
-		   $statement=$db->prepare("update  tbl_welcome set description=? where id=?");
-		   $statement->execute(array($_POST['post_description'],1));
-		   
+		
+	    //To generate id(next auto increment value from tbl_post)
+	
+		  
+		//access image process one;   
+	    $up_filename=$_FILES['post_image']['name'];   //file_name
+		$file_basename=substr($up_filename,0,strripos($up_filename,'.'));//orginal image name
+		$file_ext=substr($up_filename,strripos($up_filename,'.')); //extension
+		$f1= $up_filename;  //Rename filename;
+
+	    
+		//only allow png ,jpg,jpeg,gif
+		if(($file_ext!='.png')&&($file_ext!='.jpg')&&($file_ext!='.jpeg')&&($file_ext!='.gif')&&($file_ext!='.PNG')&&($file_ext!='.JPG')&&($file_ext!='.JPEG')&&($file_ext!='.GIF'))
+				{
+					throw new Exception("only jpg,jpeg,png and gif format are allowed");
+				}
+		
+						//To unlink previous image
+				
+				
+                        $statement1=$db->prepare("select * from tbl_welcome where id=?");
+						$statement1->execute(array(1));
+						$result1=$statement1->fetchAll(PDO::FETCH_ASSOC);
+						foreach($result1 as $row1)
+						{
+							$real_path= "profile/".$row1['post_image'];
+						    unlink($real_path);
+						}
+	     
+        //upload image to a folder
+        move_uploaded_file($_FILES['post_image']['tmp_name'],"profile/".$f1);		
+
+   $statement1=$db->prepare("update  tbl_welcome set f_name=?,l_name=?,email=?,f_quote=? ,post_image=?,description=? where id=?");
+		   $statement1->execute(array($_POST['f_name'],$_POST['l_name'],$_POST['email'],$_POST['f_quote'],$f1,$_POST['post_description'],1));
 		   $success_message="Post is updated succesfully";
+	
+	
 	}
 	
 	catch(Exception $e)
@@ -52,32 +88,95 @@ if(isset($_POST['form1']))
 			</div>
               <!-- page start-->
 
+  <div id="edit-profile" class="tab-pane">
+								        <section class="panel">                                          
+                                          <div class="panel-body bio-graph-info">
+                                              <h1>Add New Achievement</h1>
+											  
+											  <?php	
+					 if(isset($error_message)){
+                        ?>
+                        <div class="alert alert-block alert-danger fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Opps!&nbsp; </strong><?php echo $error_message;?>
+                       </div>
+                        <?php
+                      }
+                      if (isset($success_message)) {
+                       ?>
+                       <div class="alert alert-success fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Well done!&nbsp; </strong><?php echo $success_message;?>
+                       </div>
+                       <?php
+                        }
+                      ?>
+											  
+											  
+               <form class="form-horizontal" role="form" method="post" action="welcome_note.php" enctype="multipart/form-data">                                                  
 
-
-<div style="margin-left:30px;">
-<h2>Welcome Note</h2>
-<?php
-if(isset($error_message))
-		{
-		  echo "<div class='error'>".$error_message."</div>";
-		}
-		if(isset($success_message))
-		{
-			echo "<div class='success'>".$success_message."</div>";
-		}
-?>
-<form action="" method="POST" enctype="multipart/form-data">
-<table class="tabl">
-	<tr>
-		<td>
 		     <?php 
-			 $statement = $db->prepare("SELECT * FROM tbl_welcome");
-			$statement->execute();
+			 $statement = $db->prepare("SELECT * FROM tbl_welcome where id=?");
+			$statement->execute(array(1));
 			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 			foreach($result as $row)
 			{
 			 ?>
-			<textarea name="post_description" cols="100" rows="10" required><?php echo  $row['description']; ?></textarea>
+			 
+													<div class="form-group">
+                                                      <label class="col-lg-2 control-label">First Name</label>
+                                                      <div class="col-lg-6">
+                                                          <input type="text" class="form-control" value="<?php echo $row['f_name']; ?>" name="f_name" id="f-name" placeholder=" " required>
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Last Name</label>
+                                                      <div class="col-lg-6">
+                                                          <input type="text" class="form-control" value="<?php echo $row['l_name']; ?>"  name="l_name" id="l-name" placeholder=" " required>
+                                                      </div>
+                                                  </div>
+			 
+												    <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Email</label>
+                                                      <div class="col-lg-6">
+                                                          <input type="text" class="form-control" value="<?php echo $row['email']; ?>"  name="email" id="email" placeholder=" " required>
+                                                      </div>
+                                                  </div>
+												    <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Favourite Quote</label>
+                                                      <div class="col-lg-6">
+                                                          <input type="text" class="form-control" value="<?php echo $row['f_name']; ?>"  name="f_quote" id="l-name" placeholder=" " required>
+                                                      </div>
+                                                  </div>
+												   <div class="form-group">
+													<label class="col-lg-2 control-label">File Input</label>
+                                                      <div class="col-lg-6">
+													<img src="profile/<?php echo $row['post_image']; ?>" alt="" width="300px" height="250px">
+                                                      </div>
+												</div>
+												  
+											    <div class="form-group">
+													<label class="col-lg-2 control-label">File Input</label>
+                                                      <div class="col-lg-6">
+													<input type="file" name="post_image" id="exampleInputFile" required>
+                                                      </div>
+												</div>
+												   <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Welcome Note</label>
+                                                      <div class="col-lg-6">
+                                                          <textarea name="post_description" cols="100" rows="10" required><?php echo  $row['description']; ?></textarea>
+                                                      </div>
+                                                  </div>
+			 
+			 
+			 
+			 
+			 
+			
 				<script type="text/javascript">
 				if ( typeof CKEDITOR == 'undefined' )
 				{
@@ -98,11 +197,17 @@ if(isset($error_message))
 			<?php
 			}
 			?>
-		</td>
-	</tr>
-	<tr><td><input style="width:100px;"  type="submit" value="Save" name="form1"></td></tr>
-</table>
-</form>	</div>
+			     <div class="form-group">
+                                                      <div class="col-lg-offset-10 col-lg-2 ">
+                                                        <input style="width:100px;"  type="submit" value="Save" name="form">
+                                                      </div>
+                                      </div>
+
+
+</form>	
+</div>
+</section>
+</div>
 
               <!-- page end-->
           </section>

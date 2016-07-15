@@ -6,14 +6,24 @@ include_once('header.php');
 	<div class="features">
 		<div class="container">
 			<div class="col-md-7 ">
-				<h3 class="title" style="margin-bottom:10px;">WELCOME</h3><br>
-				<img src="images/2.JPG" class="user-image img-responsive"  height="320px" width="280px" style="float:left;margin-right:15px;margin-bottom:5px;margin-top:8px;"/>
 			
 				<?php 
-					$statement=$db->prepare("select description from tbl_welcome where id=1") ;
-			$statement->execute();
-            $result=$statement->fetch();
-					echo $result['description'];	
+					$statement=$db->prepare("select * from tbl_welcome where id=?") ;
+			$statement->execute(array(1));
+            $result=$statement->fetchAll(PDO::FETCH_ASSOC);
+			foreach($result as $row)
+			{
+				?>
+			
+			
+			
+			
+				<h3 class="title" style="margin-bottom:10px;">WELCOME</h3><br>
+				<img src="admin/profile/<?php echo $row['post_image']; ?>" class="user-image img-responsive"  height="320px" width="280px" style="float:left;margin-right:15px;margin-bottom:5px;margin-top:8px;"/>
+			<?php
+					echo $row['description'];
+              
+			}			  
 				?>
 				
 		

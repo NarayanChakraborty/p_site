@@ -58,8 +58,8 @@
             </div>
 			
 			<?php 
-											  
-											  $statement1=$db->prepare("select * from tbl_status where s_id=?");
+											  include_once('../config.php');
+											  $statement1=$db->prepare("select * from tbl_welcome where id=?");
 												$statement1->execute(array(1));
 												$result1=$statement1->fetchAll(PDO::FETCH_ASSOC); 
 												foreach($result1 as $row1)
