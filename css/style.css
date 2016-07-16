@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 body{
 	margin-left:10px;
 	margin-right:10px;
-	font-family: 'Roboto-Regular';
+	font-family: 'CrimsonText-Bold,AlegreyaSC-Bold,Roboto-Regular';
 	background: #fff;
 }
 @font-face {
@@ -27,7 +27,11 @@ body a{
 	text-decoration:none;
 }
 h1,h2,h3,h4,h5,h6{
+	font-family: 'AlegreyaSC-Bold';
 	margin:0;			   
+}
+h1 a{
+	font-family: 'AlegreyaSC-Bold';
 }
 p{
 	margin:0;
@@ -336,7 +340,8 @@ h3.title span {
     color: #F00000;
 }
 .features p {
-    font-size: 1em;
+    font-size: 1.2em;
+	font-family:;
     color: #000;
     line-height: 1.8em;
 }
@@ -618,29 +623,7 @@ a.diamond:hover p.servc-text{
     height: 72px;
 	transition:none;
 }
-.copy-right ul li a:hover{
-	background-position: 0px -74px;
-}
-.copy-right ul li a.gg{
-    background: url(../images/img-sprite.png)no-repeat -74px -1px;
-	width: 71px;
-}
-.copy-right ul li a.gg:hover{
-    background-position: -74px -75px;
-}
-.copy-right ul li a.twt{
-    background: url(../images/img-sprite.png)no-repeat -144px 0px;
-	width: 71px;
-}
-.copy-right ul li a.twt:hover{
-    background-position: -144px -74px;
-}
-.copy-right ul li a.be{
-    background: url(../images/img-sprite.png)no-repeat -215px -1px;
-}
-.copy-right ul li a.be:hover{
-    background-position: -215px -75px;
-}
+
 .copy-right p {
     margin-top: 1em;
     font-size: 1em;
@@ -1638,7 +1621,7 @@ ul.nav.navbar-nav.navbar-left {
     padding: 0 !important;
 }
 .features p {
-    font-size: 0.9em;
+    font-size: 1.3em;
 }
 .more {
     margin-top: 1.5em;
@@ -2508,7 +2491,7 @@ p.servc-text {
     width: 77%;
 }
 .features p {
-    font-size: 0.8em;
+    font-size: 1.2em;
     line-height: 1.6em;
 }
 .project-right {

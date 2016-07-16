@@ -13,8 +13,9 @@
 							 foreach($result1 as $row1)
 							 {
 								 ?>
-								 <li><a href="category.php?id=<?php echo $row1['cat_id']; ?>"><?php echo $row1['cat_name']; ?></a></li>
-                                </li>
+
+								 <li ><a href="category.php?id=<?php echo $row1['cat_id']; ?>"><span class="glyphicon glyphicon-hand-right"></span><?php echo " ".$row1['cat_name']; ?></a></li>
+                                
                               
 								 <?php
 							 }
@@ -74,7 +75,7 @@
 						if($month=='12') {$post_month='December';}
 					?>
 					
-				     <li><a href="archives.php?date=<?php echo $final_arr_date[$j];?>">
+				     <li><a href="archives.php?date=<?php echo $final_arr_date[$j];?>"><span class="glyphicon glyphicon-calendar"></span>
 						 <?php echo $post_month." ".$year."<br>"; ?>
 						 </a>
 					</li>

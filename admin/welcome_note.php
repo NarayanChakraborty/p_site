@@ -91,7 +91,7 @@ if(isset($_POST['form']))
   <div id="edit-profile" class="tab-pane">
 								        <section class="panel">                                          
                                           <div class="panel-body bio-graph-info">
-                                              <h1>Add New Achievement</h1>
+                                              <h1>Home Page</h1>
 											  
 											  <?php	
 					 if(isset($error_message)){
@@ -117,7 +117,7 @@ if(isset($_POST['form']))
                       ?>
 											  
 											  
-               <form class="form-horizontal" role="form" method="post" action="welcome_note.php" enctype="multipart/form-data">                                                  
+               <form class="form-horizontal" role="form" data-toggle="validator" method="post" action="welcome_note.php" enctype="multipart/form-data">                                                  
 
 		     <?php 
 			 $statement = $db->prepare("SELECT * FROM tbl_welcome where id=?");
@@ -149,7 +149,7 @@ if(isset($_POST['form']))
 												    <div class="form-group">
                                                       <label class="col-lg-2 control-label">Favourite Quote</label>
                                                       <div class="col-lg-6">
-                                                          <input type="text" class="form-control" value="<?php echo $row['f_name']; ?>"  name="f_quote" id="l-name" placeholder=" " required>
+                                                          <input type="text" class="form-control" value="<?php echo $row['f_quote']; ?>"  name="f_quote" id="l-name" placeholder=" " required>
                                                       </div>
                                                   </div>
 												   <div class="form-group">

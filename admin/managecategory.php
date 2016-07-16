@@ -117,7 +117,34 @@ require_once('../config.php');
                         }
                       ?>
 					 
-					 <?php
+								 
+						
+		
+		
+		
+		
+		
+		
+<form action="" data-toggle="validator" method="post">
+<table class="tabl">
+    
+	
+	<tr>
+	     <td>Category Name<br>
+		 <input class="short" type="text" name="cat_name" ></td>
+	</tr>
+	<tr>
+		 <td><input type="submit" value="save" name="form1" ></td>
+	</tr>
+</table>
+</form>		
+
+<!---View All Category---->
+
+<h2>View All Categories</h2>  
+
+
+		 <?php
                       if(isset($error_message2)){
                         ?>
                         <div class="alert alert-block alert-danger fade in">
@@ -138,29 +165,7 @@ require_once('../config.php');
                        </div>
                        <?php
                         }
-                      ?>					 
-						
-		
-		
-		
-		
-		
-		
-<form action="" method="post">
-<table class="tabl">
-    <tr>
-	     <td>Category Name<br>
-		 <input class="short" type="text" name="cat_name"></td>
-	</tr>
-	<tr>
-		 <td><input type="submit" value="save" name="form1"></td>
-	</tr>
-</table>
-</form>		
-
-<!---View All Category---->
-
-<h2>View All Categories</h2>  
+                      ?>
 <table class="tabl2" width="100%">
 <tr>
     <th width="5%">Serial</th>
@@ -190,7 +195,7 @@ foreach($result as $row)
     <td>
 
 	<?php echo $row['cat_name'];?></td>
-    <td><a class="btn btn-info " data-toggle="modal" href="#myModal<?php echo $row['cat_id'];?>">
+    <td><a class="btn btn-info " data-toggle="modal"  href="#myModal<?php echo $row['cat_id'];?>">
                                 Edit
                               </a>
 							 
@@ -207,7 +212,7 @@ foreach($result as $row)
 									<div class="modal-body">
 									  <h4>Category Name :</h4>
 									  <form method="post" action="" enctype="multipart/form-data">
-										<input type="text"value="<?php echo $row['cat_name'];?>"class="form-control" name="edit_cat_name"><br>
+										<input type="text"value="<?php echo $row['cat_name'];?>"class="form-control" name="edit_cat_name" required><br>
 										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
 										<input type="hidden" name="hidden_id_for_edit_cat" value="<?php echo $row['cat_id'];?>">
 										<input type="submit" value="Update" class="btn btn-success" name="form_edit_cat">

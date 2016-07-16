@@ -4,9 +4,23 @@
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu"> 
+			  
+			  	<?php 
+				include_once('../config.php');
+					$statement=$db->prepare("select * from tbl_welcome where id=?") ;
+			$statement->execute(array(1));
+            $result=$statement->fetchAll(PDO::FETCH_ASSOC);
+			foreach($result as $row)
+			{
+				?>
                     <li class="text-center">
-                    <img src="../images/2.png" class="user-image img-responsive"/>
-					</li>			  
+					
+                    <img src="profile/<?php echo $row['post_image']; ?>" class="user-image img-responsive"/>
+					</li>	
+
+               <?php
+			}
+?>			
                   <li class="active">
                       <a class="" href="index.php">
                           <i class="icon_house_alt"></i>

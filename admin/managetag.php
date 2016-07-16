@@ -90,7 +90,36 @@ require_once('../config.php');
 
 
  <h2>Add new Tag</h2>
-		  <?php
+		<?php	
+					 if(isset($error_message1)){
+                        ?>
+                        <div class="alert alert-block alert-danger fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Opps!&nbsp; </strong><?php echo $error_message1;?>
+                       </div>
+                        <?php
+                      }
+                      if (isset($success_message1)) {
+                       ?>
+                       <div class="alert alert-success fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Well done!&nbsp; </strong><?php echo $success_message1;?>
+                       </div>
+                       <?php
+                        }
+                      ?>
+					 
+							 
+						
+		
+		
+		
+		
+		
 	
 <form action="" method="post">
 <table class="tabl">
@@ -115,28 +144,7 @@ require_once('../config.php');
 </tr>
 
 <!-------SQL with PDO to fetch all category----->
-		<?php	
-					 if(isset($error_message1)){
-                        ?>
-                        <div class="alert alert-block alert-danger fade in">
-                          <button data-dismiss="alert" class="close close-sm" type="button">
-                          <i class="icon-remove"> X</i>
-                          </button>
-                          <strong>Opps!&nbsp; </strong><?php echo $error_message1;?>
-                       </div>
-                        <?php
-                      }
-                      if (isset($success_message1)) {
-                       ?>
-                       <div class="alert alert-success fade in">
-                          <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"> X</i>
-                          </button>
-                          <strong>Well done!&nbsp; </strong><?php echo $success_message1;?>
-                       </div>
-                       <?php
-                        }
-                      ?>
+				
 					 
 					 <?php
                       if(isset($error_message2)){

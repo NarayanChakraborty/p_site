@@ -1,12 +1,11 @@
-<?php 
-include_once('header.php');
-?>
-<?php include_once('config.php'); ?>
+<?php include_once('header.php'); ?>
+	<!--//header-->
+	
+
 	<!--features-->
 	<div class="features">
 		<div class="container">
-			<div class="col-md-7 ">
-			
+			<div class="col-md-7">
 				<?php 
 					$statement=$db->prepare("select * from tbl_welcome where id=?") ;
 			$statement->execute(array(1));
@@ -15,27 +14,20 @@ include_once('header.php');
 			{
 				?>
 			
-			
-			
-			
 				<h3 class="title" style="margin-bottom:10px;">WELCOME</h3><br>
-				<img src="admin/profile/<?php echo $row['post_image']; ?>" class="user-image img-responsive"  height="320px" width="280px" style="float:left;margin-right:15px;margin-bottom:5px;margin-top:8px;"/>
+				<img src="admin/profile/<?php echo $row['post_image']; ?>" class="user-image img-responsive"  height="320px" width="280px" style="float:left;margin-right:15px;margin-bottom:3px;margin-top:2px;"/>
 			<?php
 					echo $row['description'];
               
 			}			  
 				?>
-				
-		
-
 			</div>
 			<div class="col-md-1 feature-grids">
 				
 			</div>
 			<div class="col-md-4 feature-grids">
 				<h3 class="title">Recent Topics</h3>
-				
-							<?php 
+				<?php 
 					$statement=$db->prepare("select * from tbl_post ORDER BY post_date DESC LIMIT 3") ;
 			$statement->execute(array(1));
             $result=$statement->fetchAll(PDO::FETCH_ASSOC);
@@ -45,40 +37,40 @@ include_once('header.php');
 				?>
 				<div class="pince">
 					<div class="pince-left">
-						<h5><?php echo $i++; ?></h5>
+						<h5><?php echo "0".$i++; ?></h5>
 					</div>
 					<div class="pince-right">
-						<h4><a href="blog2.php?id=<?php echo $row['post_id']; ?>"><?php echo $row['post_title']; ?></h4></a>
-						<span style="font-size: 1em;
-    color: rgba(0, 0, 0, 0.64);
-	  font-family: "Times New Roman", Times, serif;"
-   ">
-	                      <small>
+						<a href="blog2.php?id=<?php echo $row['post_id']; ?>"><h4><?php echo $row['post_title']; ?> </h4></a>
+						  <div class="a">
+           				<p >
 						<?php
 						$pices=explode(" ",$row['post_description']);
 						$first_page=implode(" ",array_splice($pices,0,15));
-						
+						$first_page=$first_page."<b> ..........</b>";
 						?>
 						<?php
 						     echo $first_page;
 						?>
-						</small>
-						</span>
+						</p>
+                 </div>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
-				<?php
-			}?>
+		<?php 
+			}
+			?>
+			
 			</div>
 			<div class="clearfix"> </div>
 		</div>
 	</div>
-	<!--//features-->
+	<!--//features--><br>
+	<br>
 	<!--projects-->
 	<div class="projects">
 		<div class="container">
 			<div class="col-md-3 project-right ">
-				<h3 class="title">My <span> Gallary</span></h3>
+				<h3 class="title">OUR <span> PROJECTS</span></h3>
 				<p>Vero vulputate enim non justo posuere placerat Phasellus mauris vulputate enim non justo posuere placerat egetposuere enim .</p>
 			</div>
 			<div class="col-md-9 project-left">
@@ -151,5 +143,7 @@ include_once('header.php');
 		</div>
 	</div>
 	<!--//projects-->
-	
+	<!--services-->
+
+
 <?php include_once('footer.php'); ?>

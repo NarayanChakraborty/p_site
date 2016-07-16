@@ -20,7 +20,7 @@
 		
 			
            <div class="row">
-		    <div class="col-lg-9 col-md-12">
+		    <div class="col-lg-9 col-md-6 col-xs-6">
 					
 		      <h2 style="text-align:center;margin-left:200px;margin-top:150px">Welcome To your Dashboard </h2>
 		</div>

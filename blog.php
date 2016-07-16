@@ -225,21 +225,33 @@
 			<div class="col-md-1"></div>
             <div class="col-md-3">
 
+
                 <!-- Blog Search Well -->
                 <div class="well">
-                    
+                    			
+			<?php 
+											 
+											  $statement1=$db->prepare("select * from tbl_welcome where id=?");
+												$statement1->execute(array(1));
+												$result1=$statement1->fetchAll(PDO::FETCH_ASSOC); 
+												foreach($result1 as $row1)
+												{
+													?>
                     <div style="width:150px;height:180px;margin:0 auto">
-                      <img class="img-responsive" src="images/2.png" alt="" >
+                      <img class="img-responsive" src="admin/profile/<?php echo $row1['post_image']; ?>" alt="" >
                     </div>
-					<h4 style="text-align:center">Masud Kaium</h4>
+					<h4 style="text-align:center"><?php echo $row1['f_name']." ".$row1['l_name']; ?></h4>
                     <!-- /.input-group -->
+					<?php
+												}
+												?>
                 </div>
 
                <?php include('blog_sidebar.php'); ?>
 
         </div>
         <!-- /.row -->
-
+</div>
 		
 <?php include('footer.php'); ?>			
 			

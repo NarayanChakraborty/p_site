@@ -168,7 +168,7 @@ include('../config.php');
                                                       <label class="col-lg-2 control-label">Present Status</label>
                                                       <div class="col-lg-8">
                                                           <textarea name="p_status"  id="" placeholder="use <br> to display next line" class="form-control" cols="30" rows="5"><?php echo $row1['p_status']; ?></textarea>
-                                                          <span class="help-block with-errors">To seperate line, use <br> at the end of the line </span>
+                                                          <span class="help-block with-errors">To seperate line, use &ltbr&gt at the end of the line </span>
 													 </div>
                                                   </div>
                                            <div class="form-group">
@@ -226,14 +226,14 @@ include('../config.php');
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Achievement Title</label>
                                                       <div class="col-lg-6">
-                                                          <input type="text" name="a_title"  class="form-control" id="f-name" placeholder=" ">
+                                                          <input type="text" name="a_title"  class="form-control" id="f-name" placeholder=" " required>
                                                       </div>
                                                   </div>
                                               
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Description</label>
                                                       <div class="col-lg-8">
-                                                          <textarea  name="a_details" class="form-control" cols="30" rows="5"></textarea>
+                                                          <textarea  name="a_details" class="form-control" cols="30" rows="5" required></textarea>
                                                       </div>
                                                   </div>
                                            <div class="form-group">
@@ -320,9 +320,9 @@ foreach($result as $row)
 									<div class="modal-body">
 									  <h4>Achievement Title:</h4>
 									  <form method="post" action="" enctype="multipart/form-data">
-										<input type="text"value="<?php echo $row['achievement_title'];?>"class="form-control" name="a_title"><br>
+										<input type="text"value="<?php echo $row['achievement_title'];?>"class="form-control" name="a_title" required><br>
 										<h4>Achievement Description :</h4>
-										<textarea  name="a_details" name="a_details" class="form-control" cols="30" rows="5"><?php echo $row['achievement_details']; ?></textarea>
+										<textarea  name="a_details" name="a_details" class="form-control" cols="30" rows="5" required><?php echo $row['achievement_details']; ?></textarea>
 										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
 										<input type="hidden" name="hidden_id_for_edit_achievement" value="<?php echo $row['achievement_id'];?>">
 										<input type="submit" value="Update" class="btn btn-success" name="form_edit_achievement">

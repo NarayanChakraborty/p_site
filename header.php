@@ -63,7 +63,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="top-nav-text">
 						<ul>
 						
-							<li >Me : <a class="email-link" href="mailto:example@mail.com"><?php echo $row1['email']; ?> </a></li>
+							<li >Me : <a class="email-link" href="mailto:<?php echo $row1['email']; ?>"><?php echo $row1['email']; ?> </a></li>
 							<li>
 								<ul class="social-icons">
 									<li><a href="#"></a></li>
