@@ -13,12 +13,32 @@ include('../config.php');
 <?php
 
 if(isset($_POST['form']))
+	
 {
+	
 	try{  
 	
-	
+	   // Undefined | Multiple Files | $_FILES Corruption Attack
+    // If this request falls under any of them, treat it invalid.
+    if (
+        !isset($_FILES['post_image']['error']) ||
+        is_array($_FILES['post_image']['error'])
+    ) {
+        throw new RuntimeException('Invalid parameters.');
+    }
 
-		 if($_FILES['post_image']['size']>2000000){
+    // Check $_FILES['upfile']['error'] value.
+
+	
+if(empty($_FILES['post_image']['name']))
+        {
+			 //pdo to insert all above informations.. to tbl_post
+		 $statement1=$db->prepare("update  tbl_welcome set f_name=?,l_name=?,email=?,f_quote=? ,description=? where id=?");
+		 $statement1->execute(array($_POST['f_name'],$_POST['l_name'],$_POST['email'],$_POST['f_quote'],$_POST['post_description'],1));
+		}	
+         else
+         {
+		 if($_FILES['post_image']['size']>=3000000){
 		 throw new Exception("Sorry,your file is too large"); //image file must be<1MB
 		 }
 		
@@ -38,6 +58,13 @@ if(isset($_POST['form']))
 				{
 					throw new Exception("only jpg,jpeg,png and gif format are allowed");
 				}
+				
+
+				
+				$target_folder = 'profile/'; 
+    $upload_image = $target_folder.$f1;
+
+   
 		
 						//To unlink previous image
 				
@@ -47,15 +74,20 @@ if(isset($_POST['form']))
 						$result1=$statement1->fetchAll(PDO::FETCH_ASSOC);
 						foreach($result1 as $row1)
 						{
-							$real_path= "profile/".$row1['post_image'];
+							$real_path= $target_folder.$row1['post_image'];
 						    unlink($real_path);
 						}
 	     
         //upload image to a folder
-        move_uploaded_file($_FILES['post_image']['tmp_name'],"profile/".$f1);		
+		 if(!move_uploaded_file($_FILES['post_image']['tmp_name'],$upload_image)) 
+    {
+      throw new Exception('image is not uploaded');
+    }
+        		
 
    $statement1=$db->prepare("update  tbl_welcome set f_name=?,l_name=?,email=?,f_quote=? ,post_image=?,description=? where id=?");
-		   $statement1->execute(array($_POST['f_name'],$_POST['l_name'],$_POST['email'],$_POST['f_quote'],$f1,$_POST['post_description'],1));
+		 $statement1->execute(array($_POST['f_name'],$_POST['l_name'],$_POST['email'],$_POST['f_quote'],$f1,$_POST['post_description'],1));
+		 }
 		   $success_message="Post is updated succesfully";
 	
 	
@@ -162,7 +194,7 @@ if(isset($_POST['form']))
 											    <div class="form-group">
 													<label class="col-lg-2 control-label">File Input</label>
                                                       <div class="col-lg-6">
-													<input type="file" name="post_image" id="exampleInputFile" required>
+													<input type="file" name="post_image" id="exampleInputFile">
                                                       </div>
 												</div>
 												   <div class="form-group">

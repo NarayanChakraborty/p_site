@@ -40,7 +40,7 @@
 						<h5><?php echo "0".$i++; ?></h5>
 					</div>
 					<div class="pince-right">
-						<a href="blog2.php?id=<?php echo $row['post_id']; ?>"><h4><?php echo $row['post_title']; ?> </h4></a>
+						<h4><a href="blog2.php?id=<?php echo $row['post_id']; ?>"><?php echo $row['post_title']; ?> </a></h4>
 						  <div class="a">
            				<p >
 						<?php

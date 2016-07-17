@@ -1,3 +1,28 @@
+<div class="col-md-1"></div>
+            <div class="col-md-3">
+
+                <!-- Blog Search Well -->
+                 <div class="well">
+                    			
+			<?php 
+											 
+											  $statement1=$db->prepare("select * from tbl_welcome where id=?");
+												$statement1->execute(array(1));
+												$result1=$statement1->fetchAll(PDO::FETCH_ASSOC); 
+												foreach($result1 as $row1)
+												{
+													?>
+                    <div >
+                      <img class="img-responsive img-md " src="admin/profile/<?php echo $row1['post_image']; ?>" alt="" >
+                    </div>
+					<h4 style="text-align:center"><?php echo $row1['f_name']." ".$row1['l_name']; ?></h4>
+                    <!-- /.input-group -->
+					<?php
+												}
+												?>
+                </div>
+
+
  <!-- Blog Categories Well -->
                 <div class="well">
                     <h4>Blog Categories</h4><br>
@@ -102,7 +127,7 @@
 							 foreach($result1 as $row1)
 							 {
 								 ?>
-								 <a href="" class="btn btn-default disabled"><?php echo $row1['tag_name']; ?></a>
+								 <a href="" class="btn btn-default disabled"><span class="glyphicon glyphicon-tag"></span><?php echo $row1['tag_name']; ?></a>
                                 
                               
 								 <?php

@@ -58,6 +58,14 @@ if(isset($_POST['form1']))
 		   $tag_ids=implode(",",$arr);
 		   
  	    
+		  if (
+        !isset($_FILES['post_image']['error']) ||
+        is_array($_FILES['post_image']['error'])
+    ) {
+        throw new RuntimeException('Invalid parameters.');
+    }
+		
+		
 	 //IMAGE MANAGE
         //if no new image is selected  
 		if(empty($_FILES['post_image']['name']))
@@ -88,6 +96,9 @@ if(isset($_POST['form1']))
 				}
 				 
 				
+						$target_folder = 'uploads/'; 
+    $upload_image = $target_folder.$f1;
+				
 				
 				//To unlink previous image
 				
@@ -97,14 +108,14 @@ if(isset($_POST['form1']))
 						$result1=$statement1->fetchAll(PDO::FETCH_ASSOC);
 						foreach($result1 as $row1)
 						{
-							$real_path= "uploads/".$row1['post_image'];
+							$real_path= $target_folder.$row1['post_image'];
 						    unlink($real_path);
 						}
-				//upload image to a folder
-				
-				move_uploaded_file($_FILES['post_image']['tmp_name'],"uploads/".$f1);
-				
-				
+				      //upload image to a folder
+		 if(!move_uploaded_file($_FILES['post_image']['tmp_name'],$upload_image)) 
+    {
+      throw new Exception('image is not uploaded');
+    }
 				 $statement=$db->prepare("update  tbl_post set post_title=?,post_description=?,post_image=?,cat_id=?,tag_id=? where post_id=?");
 		   $statement->execute(array($_POST['post_title'],$_POST['post_description'],$f1,$_POST['cat_id'],$tag_ids,$id));
 				

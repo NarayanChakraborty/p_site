@@ -6,7 +6,34 @@ if(!isset($_REQUEST['id']))
 }
 $id=$_REQUEST['id'];
 ?>
+<?php
+if(isset($_POST['form']))
+{
+	try{
+		
+			if(!(preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/", $_POST['c_email'])))
+		    {
+			 throw new Exception("Please Enter a valid Email Address<br>");
+			  //echo "<div class='error'>Please Enter a valid Email Address</div><br>";
+		    }
+			$c_date=date("Y-m-d");
+			$active =0;
+	     include_once('config.php');
+	     $statement=$db->prepare("insert into tbl_comment(c_name,c_email,c_message,c_date,post_id,action) values(?,?,?,?,?,?)");
+		 $statement->execute(array($_POST['c_name'],$_POST['c_email'],$_POST['c_comment'],$c_date,$id,$active));
+		   
+	
+	     $success_msg="Your Comment successfully sent,it will be published after admin approval";
+	    
+	
+	}
+	catch(Exception $e)
+	{
+	$error_msg=$e->getMessage();
+	}
+}
 
+?>
 
 <?php include('header.php'); ?>
 		
@@ -84,7 +111,7 @@ $id=$_REQUEST['id'];
                 
 				
                 <!-- Preview Image -->
-                <img  src="admin/uploads/<?php echo $row['post_image'];?>" alt="" width="200px" height="150px" style="float:left;padding-right:10px;padding-bottom:7px">
+                <img  src="admin/uploads/<?php echo $row['post_image'];?>" alt="" width="250px" height="200px" style="float:left;padding-right:10px;padding-bottom:7px">
                
 				  <div class="a">
            				<p >
@@ -98,6 +125,9 @@ $id=$_REQUEST['id'];
 
 				
 				</div>
+				
+				
+			
 				<!--- Blog Post--->    
  <ul class="pager">
     <li class="previous"><a href="blog.php">←Back to Blogs</a></li>
@@ -110,34 +140,111 @@ $id=$_REQUEST['id'];
  
     <h4>Leave a comment</h4>
  
-    <form role="form" class="clearfix">
+    <form role="form" data-toggle="validator" action="blog2.php?id=<?php echo $row['post_id'];?>" method="POST" class="clearfix">
  
         <div class="col-md-6 form-group">
             <label class="sr-only" for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Name">
+            <input type="text" class="form-control" name="c_name" id="name" placeholder="Name" required>
         </div>
  
         <div class="col-md-6 form-group">
             <label class="sr-only" for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Email">
+            <input type="email" class="form-control" name="c_email" id="email" placeholder="Email" required>
         </div>
  
         <div class="col-md-12 form-group">
             <label class="sr-only" for="email">Comment</label>
-            <textarea class="form-control" id="comment" placeholder="Comment"></textarea>
+            <textarea class="form-control" id="comment" name='c_comment' placeholder="Comment"required></textarea>
         </div>
  
         <div class="col-md-12 form-group text-right">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" name="form">Submit</button>
         </div>
  
     </form>
 </div>
 
-                <hr>
+      
+			<?php
+					 }
+					 ?>          <hr>
 
                 <!-- Posted Comments -->
+<div class="box-footer box-comments">
 
+				<?php
+			$statement=$db->prepare("select * from tbl_comment where action=1 and post_id=?");
+			$statement->execute(array($id));
+			$result=$statement->fetchAll(PDO::FETCH_ASSOC);
+			$num=$statement->rowCount();
+			 if($num==0)
+				{
+					 ?>
+			          <h2 style="text-align:center;">No Comment Found</h2>
+				  <?php	
+				}
+			
+			foreach($result as $row)
+			{
+			  ?>
+					
+
+
+
+              <div class="box-comment">
+                <!-- User image -->
+				<?php
+							$gravatarMd5=md5($row['c_email']);
+							//$gravatarMd5=""; //when no gravatar is found
+							?>
+							<img class="img-circle img-sm" src="http://www.gravatar.com/avatar/<?php echo $gravatarMd5;?>" alt="" >
+				
+               
+
+                <div class="comment-text">
+                      <span class="username">
+                         <?php
+                  echo $row['c_name'];
+				  ?>
+				  
+                        	  <?php
+						$date=$row['c_date'];
+						$year=substr($date,0,4);
+						$month=substr($date,5,2);
+						$post_day=substr($post_date,8,2);
+						
+						if($month=='01') {$post_month='Jan';}
+						if($month=='02') {$post_month='Feb';}
+						if($month=='03') {$post_month='Mar';}
+						if($month=='04') {$post_month='Apr';}
+						if($month=='05') {$post_month='May';}
+						if($month=='06') {$post_month='Jun';}
+						if($month=='07') {$post_month='JUL';}
+						if($month=='08') {$post_month='Aug';}
+						if($month=='09') {$post_month='Sep';}
+						if($month=='10') {$post_month='Oct';}
+						if($month=='11') {$post_month='Nov';}
+						if($month=='12') {$post_month='Dec';}
+						?>
+						<span class="text-muted pull-right"><?php echo "$post_day"." "."$post_month"." "."$year";?></span>
+                      </span><!-- /.username -->
+  
+						 <?php
+							    echo $row['c_message'];
+						 ?>
+	  
+					
+                </div>
+                <!-- /.comment-text -->
+              </div>
+			  
+			  
+			  
+			  <?php
+			}
+			?>
+              
+            </div>
            
 
                 <!-- Comment -->
@@ -165,29 +272,15 @@ $id=$_REQUEST['id'];
 			
 			
 			
-			
-			<?php
-					 }
-					 ?>
    <!-- Blog Sidebar Widgets Column -->
-			<div class="col-md-1"></div>
-            <div class="col-md-3">
-
-                <!-- Blog Search Well -->
-                <div class="well">
-                    
-                    <div style="width:150px;height:180px;margin:0 auto">
-                      <img class="img-responsive" src="images/2.png" alt="" >
-                    </div>
-					<h4 style="text-align:center">Masud Kaium</h4>
-                    <!-- /.input-group -->
-                </div>
+			
 
                <?php include('blog_sidebar.php'); ?>
         </div>
         <!-- /.row -->
 
-        <hr>
+    
+		</div>
 		
 <?php include('footer.php'); ?>			
 			

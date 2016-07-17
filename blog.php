@@ -198,6 +198,12 @@
                  </div>
                 <hr>
 				<p class="comments">Comments 
+				<?php
+				   $statement1=$db->prepare("select * from tbl_comment where post_id=? and action=1");
+                   $statement1->execute(array($row['post_id']));
+                   $totalnum=$statement1->rowCount();
+                   echo "(".$totalnum.")";				   
+				?>
 				
 
 				<span>|</span>   <a href="blog2.php?id=<?php echo $row['post_id']; ?>">Continue Reading</a></p><br><br>
@@ -222,31 +228,7 @@
 			
 			
             <!-- Blog Sidebar Widgets Column -->
-			<div class="col-md-1"></div>
-            <div class="col-md-3">
-
-
-                <!-- Blog Search Well -->
-                <div class="well">
-                    			
-			<?php 
-											 
-											  $statement1=$db->prepare("select * from tbl_welcome where id=?");
-												$statement1->execute(array(1));
-												$result1=$statement1->fetchAll(PDO::FETCH_ASSOC); 
-												foreach($result1 as $row1)
-												{
-													?>
-                    <div style="width:150px;height:180px;margin:0 auto">
-                      <img class="img-responsive" src="admin/profile/<?php echo $row1['post_image']; ?>" alt="" >
-                    </div>
-					<h4 style="text-align:center"><?php echo $row1['f_name']." ".$row1['l_name']; ?></h4>
-                    <!-- /.input-group -->
-					<?php
-												}
-												?>
-                </div>
-
+			
                <?php include('blog_sidebar.php'); ?>
 
         </div>

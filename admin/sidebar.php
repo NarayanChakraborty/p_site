@@ -15,7 +15,7 @@
 				?>
                     <li class="text-center">
 					
-                    <img src="profile/<?php echo $row['post_image']; ?>" class="user-image img-responsive"/>
+                    <img src="profile/<?php echo $row['post_image']; ?>" class="user-image img-responsive img-sm" />
 					</li>	
 
                <?php
@@ -54,7 +54,7 @@
                   </li>
     
                   <li>                     
-                      <a class="" href="#
+                      <a class="" href="comments.php"
 					  ">
                           <i class="icon_piechart"></i>
                           <span>View Comments</span>

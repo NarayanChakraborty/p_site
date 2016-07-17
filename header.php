@@ -105,7 +105,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <li><a href="contact.php">Contact</a></li> 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Developer</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Developer</a>
+		
+</li>
         
       </ul>
     </div>
