@@ -9,6 +9,7 @@ body{
 	margin-right:10px;
 	font-family: 'CrimsonText-Bold,AlegreyaSC-Bold,Roboto-Regular';
 	background: #fff;
+	text-align:justify;
 }
 @font-face {
     font-family: 'Roboto-Regular';

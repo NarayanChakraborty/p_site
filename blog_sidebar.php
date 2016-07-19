@@ -12,9 +12,10 @@
 												foreach($result1 as $row1)
 												{
 													?>
-                    <div >
-                      <img class="img-responsive img-md " src="admin/profile/<?php echo $row1['post_image']; ?>" alt="" >
-                    </div>
+                    <div ><center>
+                      <img class="img-responsive img-md " style="height:150px;width:120px" src="admin/profile/<?php echo $row1['post_image']; ?>" alt="" >
+                   </center>
+				   </div>
 					<h4 style="text-align:center"><?php echo $row1['f_name']." ".$row1['l_name']; ?></h4>
                     <!-- /.input-group -->
 					<?php

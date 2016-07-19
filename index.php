@@ -5,7 +5,7 @@
 	<!--features-->
 	<div class="features">
 		<div class="container">
-			<div class="col-md-7">
+			<div class="col-md-8">
 				<?php 
 					$statement=$db->prepare("select * from tbl_welcome where id=?") ;
 			$statement->execute(array(1));
@@ -22,9 +22,7 @@
 			}			  
 				?>
 			</div>
-			<div class="col-md-1 feature-grids">
-				
-			</div>
+		
 			<div class="col-md-4 feature-grids">
 				<h3 class="title">Recent Topics</h3>
 				<?php 

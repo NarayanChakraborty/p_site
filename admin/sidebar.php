@@ -14,8 +14,9 @@
 			{
 				?>
                     <li class="text-center">
-					
-                    <img src="profile/<?php echo $row['post_image']; ?>" class="user-image img-responsive img-sm" />
+					<center>
+                    <img src="profile/<?php echo $row['post_image']; ?>" class="user-image img-circle img-responsive " style="height:120px" />
+					</center>
 					</li>	
 
                <?php
