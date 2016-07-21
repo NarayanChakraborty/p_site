@@ -19,10 +19,14 @@ include('../config.php');
 		 if(empty($_POST['p_status']))
 		 {
 			 throw new Exception("Status can not be empty");
+		 } 
+		 if(empty($_POST['cv_link']))
+		 {
+			 throw new Exception("CV Link can not be empty");
 		 }
 				 //SearchSql and PDO
-	       $statement2=$db->prepare("update  tbl_status set p_status=? where s_id=?");
-		   $statement2->execute(array($_POST['p_status'],1));
+	       $statement2=$db->prepare("update  tbl_status set p_status=?,cv_link=? where s_id=?");
+		   $statement2->execute(array($_POST['p_status'],$_POST['cv_link'],1));
 		   
 		   $success_message="Status is updated succesfully";
 		}
@@ -170,6 +174,12 @@ include('../config.php');
                                                           <textarea name="p_status"  id="" placeholder="use <br> to display next line" class="form-control" cols="30" rows="5"><?php echo $row1['p_status']; ?></textarea>
                                                           <span class="help-block with-errors">To seperate line, use &ltbr&gt at the end of the line </span>
 													 </div>
+                                                  </div>
+							                          <div class="form-group">
+                                                      <label class="col-lg-2 control-label">CV Downloadable Link</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="text" name="cv_link" value ="<?php echo $row1['cv_link']; ?>" class="form-control" id="f-name" placeholder=" " required>
+                                                      </div>
                                                   </div>
                                            <div class="form-group">
                                                       <div class="col-lg-offset-2 col-lg-10">

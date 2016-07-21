@@ -5,7 +5,7 @@ include_once('header.php');
 	<!--features-->
 	<div class="features">
 		<div class="container">
-			<div class="col-md-12 panel-grids">
+			<div class="col-xs-6  col-lg-12 panel-grids">
 						<?php
 						 $statement=$db->prepare("select * from tbl_status");
 									 $statement->execute();
@@ -17,14 +17,17 @@ include_once('header.php');
 			
 			
 						<div class="panel panel-default"> <div class="panel-heading"> <h3 class="panel-title">Present Status</h3> </div> <div class="panel-body"><?php echo $row['p_status']; ?></div> </div>
-					   
+					 
+					</div>
+					<div class="col-md-12 panel-grids">
+						<div class="panel panel-success"> <div class="panel-heading"> <h3 class="panel-title">My CV</h3> </div> <div class="panel-body"><p>All files including the compiled CSS. Download this version if you plan on customizing the template.
+						<b>Requires a LESS compiler.</b></p>
+          <a href="<?php echo $row['cv_linl']; ?>" class="btn btn-success"><i class="fa fa-download"></i> Download</a></div> </div>
+					</div>
+					  
 					   <?php
 									 }
 					   ?>
-					</div>
-					<div class="col-md-12 panel-grids">
-						<div class="panel panel-success"> <div class="panel-heading"> <h3 class="panel-title">My CV</h3> </div> <div class="panel-body"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin iaculis quam sit amet nisi dictum, in iaculis dolor lobortis. Aenean placerat purus non faucibus. </div> </div>
-					</div>
 					<div class="col-md-12 panel-grids">
 						<div class="panel panel-info"> <div class="panel-heading"> <h3 class="panel-title">My Achievements</h3> </div> <div class="panel-body">
 						<?php
@@ -66,6 +69,7 @@ include_once('header.php');
 					
 					
 					</div>
-	
+	</div>
+	</div>
 	
 <?php include_once('footer.php'); ?>
