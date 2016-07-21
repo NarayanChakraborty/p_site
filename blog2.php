@@ -111,7 +111,7 @@ if(isset($_POST['form']))
                 
 				
                 <!-- Preview Image -->
-                <img  src="admin/uploads/<?php echo $row['post_image'];?>" alt="" width="250px" height="200px" style="float:left;padding-right:10px;padding-bottom:7px">
+                <img  src="admin/uploads/<?php echo $row['post_image'];?>" class="img-responsive" alt="" width="400px" height="260px" style="float:left;margin-right:15px;margin-bottom:12px">
                
 				  <div class="a">
            				<p >
@@ -138,7 +138,7 @@ if(isset($_POST['form']))
                 <!-- Comments Form -->
    <div class="well">
  
-    <h4>Leave a comment</h4>
+    <h4>Leave a comment</h4><br>
  
     <form role="form" data-toggle="validator" action="blog2.php?id=<?php echo $row['post_id'];?>" method="POST" class="clearfix">
  
@@ -167,7 +167,7 @@ if(isset($_POST['form']))
       
 			<?php
 					 }
-					 ?>          <hr>
+					 ?>          
 
                 <!-- Posted Comments -->
 <div class="box-footer box-comments">
@@ -183,7 +183,11 @@ if(isset($_POST['form']))
 			          <h2 style="text-align:center;">No Comment Found</h2>
 				  <?php	
 				}
-			
+				else{
+					?>
+			<h3>All Comments</h3>
+			<br><hr>
+			<?php
 			foreach($result as $row)
 			{
 			  ?>
@@ -241,6 +245,7 @@ if(isset($_POST['form']))
 			  
 			  
 			  <?php
+			}
 			}
 			?>
               

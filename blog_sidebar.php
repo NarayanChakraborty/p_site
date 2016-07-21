@@ -13,7 +13,7 @@
 												{
 													?>
                     <div ><center>
-                      <img class="img-responsive img-md " style="height:150px;width:120px" src="admin/profile/<?php echo $row1['post_image']; ?>" alt="" >
+                      <img class="img-responsive " style="height:160px;width:150px" src="admin/profile/<?php echo $row1['post_image']; ?>" alt="" >
                    </center>
 				   </div>
 					<h4 style="text-align:center"><?php echo $row1['f_name']." ".$row1['l_name']; ?></h4>
@@ -28,7 +28,7 @@
                 <div class="well">
                     <h4>Blog Categories</h4><br>
                     <div class="row">
-                        <div class="col-md-12 col-xs-6">
+                        <div class="col-md-12 col-xs-10">
                             <ul class="list-unstyled">
 							
 						     <?php 
@@ -40,7 +40,7 @@
 							 {
 								 ?>
 
-								 <li ><a href="category.php?id=<?php echo $row1['cat_id']; ?>"><span class="glyphicon glyphicon-hand-right"></span><?php echo " ".$row1['cat_name']; ?></a></li>
+								 <li><a href="category.php?id=<?php echo $row1['cat_id']; ?>"><span class="glyphicon glyphicon-hand-right"></span><?php echo "  ".$row1['cat_name']; ?></a></li>
                                 
                               
 								 <?php
@@ -79,7 +79,7 @@
 					 ?> 
 					
                     <div class="row">
-                        <div class="col-md-12 col-xs-6">
+                        <div class="col-md-12 col-xs-8">
                             <ul class="list-unstyled">
                               		    <?php 
 					for($j=0;$j<$final_arr_date_count;$j++)
@@ -102,7 +102,7 @@
 					?>
 					
 				     <li><a href="archives.php?date=<?php echo $final_arr_date[$j];?>"><span class="glyphicon glyphicon-calendar"></span>
-						 <?php echo $post_month." ".$year."<br>"; ?>
+						 <?php echo $post_month."  ".$year."<br>"; ?>
 						 </a>
 					</li>
 					<?php
@@ -117,9 +117,8 @@
 				<div class="well">
                     <h4>Blog Tags</h4><br>
                     <div class="row">
-                        <div class="col-lg-12 col-xs-6">
-                            <ul class="list-unstyled">
-							
+                       <div class="col-md-12 col-xs-10" style="text-align:left">
+                           
 						     <?php 
 							
 							 $statement1=$db->prepare("select * from tbl_tag");
@@ -128,15 +127,13 @@
 							 foreach($result1 as $row1)
 							 {
 								 ?>
-								 <a href="" class="btn btn-default disabled"><span class="glyphicon glyphicon-tag"></span><?php echo $row1['tag_name']; ?></a>
-                                
-                              
+								 <a href=""class="btn btn-default disabled"><span class="glyphicon glyphicon-tag"></span><?php echo " ".$row1['tag_name']; ?></a>
 								 <?php
 							 }
 							 
 							 ?>
 							   
-                            </ul>
+                            
                         </div>
                 
                     </div>

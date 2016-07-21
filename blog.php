@@ -48,9 +48,9 @@
 			{   
 				$pagination .= "<div class=\"pagination\">";
 				if ($page > 1) 
-					$pagination.= "<a href=\"$targetpage?page=$prev\">&#171; previous</a>";
+					$pagination.= "<a href=\"$targetpage?page=$prev\">&#171; back</a>";
 				else
-					$pagination.= "<span class=\"disabled\">&#171; previous</span>";    
+					$pagination.= "<span class=\"disabled\">&#171;back</span>";    
 				if ($lastpage < 7 + ($adjacents * 2))   //not enough pages to bother breaking it up
 				{   
 					for ($counter = 1; $counter <= $lastpage; $counter++)
@@ -182,13 +182,13 @@
                 
 				
                 <!-- Preview Image -->
-                <img  src="admin/uploads/<?php echo $row['post_image'];?>" alt="" width="200px" height="150px" style="float:left;padding-right:10px;padding-bottom:7px">
+                <img  src="admin/uploads/<?php echo $row['post_image'];?>" class="img-responsive"  alt="" width="200px" height="160px" style="float:left;padding-right:12px">
                  
 				  <div class="a">
            				<p >
 						<?php
 						$pices=explode(" ",$row['post_description']);
-						$first_page=implode(" ",array_splice($pices,0,95));
+						$first_page=implode(" ",array_splice($pices,0,90));
 						$first_page=$first_page."<b> ..........</b>";
 						?>
 						<?php
@@ -197,13 +197,13 @@
 						</p>
                  </div>
                 <hr>
-				<p class="comments">Comments 
+				<p class="comments"><a href="blog2.php?id=<?php echo $row['post_id']; ?>">Comments 
 				<?php
 				   $statement1=$db->prepare("select * from tbl_comment where post_id=? and action=1");
                    $statement1->execute(array($row['post_id']));
                    $totalnum=$statement1->rowCount();
                    echo "(".$totalnum.")";				   
-				?>
+				?></a>
 				
 
 				<span>|</span>   <a href="blog2.php?id=<?php echo $row['post_id']; ?>">Continue Reading</a></p><br><br>

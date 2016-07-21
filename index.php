@@ -5,7 +5,7 @@
 	<!--features-->
 	<div class="features">
 		<div class="container">
-			<div class="col-md-8">
+			<div class="col-md-7">
 				<?php 
 					$statement=$db->prepare("select * from tbl_welcome where id=?") ;
 			$statement->execute(array(1));
@@ -22,7 +22,7 @@
 			}			  
 				?>
 			</div>
-		
+		    <div class="col-md-1"></div>
 			<div class="col-md-4 feature-grids">
 				<h3 class="title">Recent Topics</h3>
 				<?php 
@@ -33,9 +33,9 @@
 			foreach($result as $row)
 			{
 				?>
-				<div class="pince">
+				<div class="pince" style="font-height:.5em;margin-bottom:-10px">
 					<div class="pince-left">
-						<h5><?php echo "0".$i++; ?></h5>
+						<h5 style="text-align:center;padding-left:5px;padding-right:5px"><?php echo "0".$i++; ?></h5>
 					</div>
 					<div class="pince-right">
 						<h4><a href="blog2.php?id=<?php echo $row['post_id']; ?>"><?php echo $row['post_title']; ?> </a></h4>
@@ -44,7 +44,7 @@
 						<?php
 						$pices=explode(" ",$row['post_description']);
 						$first_page=implode(" ",array_splice($pices,0,15));
-						$first_page=$first_page."<b> ..........</b>";
+					
 						?>
 						<?php
 						     echo $first_page;
@@ -57,6 +57,11 @@
 		<?php 
 			}
 			?>
+			
+			
+			
+			
+			
 			
 			</div>
 			<div class="clearfix"> </div>

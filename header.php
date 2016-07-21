@@ -33,6 +33,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			});
 		});
 </script>
+<link href="css/style2.css" type="text/css" rel="stylesheet" media="all">
 <!--//end-smooth-scrolling-->	
 </head>
 <body>
@@ -55,7 +56,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 		
 				<!--navigation-->
-				<div class="header-text navbar-left" style="margin-top:25px;">
+				<div class="header-text navbar-left" style="margin-top:25px;padding-right:10px">
 					<p><?php echo ' " '. $row1['f_quote'].' " '; ?><p>
 				</div>
 
@@ -86,7 +87,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>	
 
 		</nav>	
-<nav class="navbar navbar-inverse" style="margin-left:15px;margin-right:15px;">
+<nav class="navbar navbar-inverse" style="margin-left:20px;margin-right:20px;">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -94,22 +95,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-      <a class="navbar-brand" href="index.php">Home</a>
+      <a class="navbar-brand" style="font-size:18px;color:#fff;padding-bottom:-5px" href="index.php">Home</a>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
+    <div class="collapse navbar-collapse " id="myNavbar">
+      <ul class="nav navbar-nav font" >
         
-        <li><a href="about.php">About</a></li>
-        <li><a href="blog.php">Blog</a></li> 
+        <li><a style="font-size:18px;color:#fff;padding-left:15px;padding-right:15px " href="about.php">About</a></li>
+        <li><a style="font-size:18px;color:#fff;padding-left:15px;padding-right:15px " href="blog.php">Blog</a></li> 
 	
-        <li><a href="contact.php">Contact</a></li> 
+        <li><a style="font-size:18px;color:#fff;padding-left:15px;padding-right:15px " href="contact.php">Contact</a></li> 
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Developer</a>
-		
-</li>
-        
-      </ul>
+   
     </div>
   </div>
 </nav>		

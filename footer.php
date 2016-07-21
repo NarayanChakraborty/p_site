@@ -5,7 +5,6 @@
 
 			<div class="clearfix"> </div>
 			<p>© 2016 Personal Website . All rights reserved | Design by <a href="http://w3layouts.com">SN Chakraborty</a><br>
-			Mail : <a class="email-link" href="mailto:narayanchakraborty1993@gmail.com">narayanchakraborty1993@gmail.com</a>
 			</p>	
 		</div>
 	</div>
